@@ -1,0 +1,25 @@
+{
+    "result": 1,
+    "data": {
+        "rewards": [
+            {
+                "id": 219,
+                "name": "q",
+                "count": 12,
+                "sent": 0,
+                "price": 10
+            }
+        ],
+        "isPause": 0,
+        "price": {
+            "remain": 120,
+            "sent": 0,
+            "total": 120
+        },
+        "totalcount": "0",
+        "prizecount": 0,
+        "rate": 100,
+        "newusercount": "0"
+    },
+    "msg": "success"
+}

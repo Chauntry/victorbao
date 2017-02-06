@@ -1,0 +1,18 @@
+{
+    "result": 1,
+    "data": {
+        "rewards": [
+            {
+                "id": 220,
+                "name": "a",
+                "count": 1,
+                "sent": 0
+            }
+        ],
+        "time": -30,
+        "rewardId": 0,
+        "status": 1,
+        "prizeStatus": 0
+    },
+    "msg": "success"
+}

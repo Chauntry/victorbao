@@ -1,0 +1,88 @@
+{
+    "result": 1,
+    "data": {
+        "status": 1,
+        "id": 94,
+        "address": "上海市普陀区123",
+        "latitude": "",
+        "longitude": "",
+        "surveyList": [
+            {
+                "id": 1,
+                "type": "radio",
+                "question": "您每天花多长时间看电视？",
+                "selection": {
+                    "1": "2小时以上",
+                    "2": "1-2小时",
+                    "3": "30分钟",
+                    "4": "基本不看"
+                }
+            },
+            {
+                "id": 2,
+                "type": "radio",
+                "question": "您最爱看哪档新闻节目？",
+                "selection": {
+                    "1": "《江苏新时空》",
+                    "2": "《新闻眼》",
+                    "3": "《早安江苏》",
+                    "4": "《新闻360》",
+                    "5": "《新@财经》",
+                    "6": "《通天下》"
+                }
+            }
+        ],
+        "telecasts": [
+            {
+                "id": 1,
+                "name": "我们相爱吧",
+                "smallImage": null,
+                "largeImage": null,
+                "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/wmxab.jpg\"/>\n",
+                "reserveid": 2642,
+                "reserve_date": 0
+            },
+            {
+                "id": 11,
+                "name": "真心英雄",
+                "smallImage": null,
+                "largeImage": null,
+                "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/realhero.jpg\"/>\n",
+                "reserveid": 0,
+                "reserve_date": 0
+            },
+            {
+                "id": 12,
+                "name": "我的宝贝",
+                "smallImage": null,
+                "largeImage": null,
+                "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/mybaby.jpg\"/>\n",
+                "reserveid": 0,
+                "reserve_date": 0
+            },
+            {
+                "id": 13,
+                "name": "加油吧实习生",
+                "smallImage": null,
+                "largeImage": null,
+                "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/sxs.jpg\"/>\n",
+                "reserveid": 0,
+                "reserve_date": 0
+            },
+            {
+                "id": 14,
+                "name": "减出我人生",
+                "smallImage": null,
+                "largeImage": null,
+                "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/jcwrs.jpg\"/>\n",
+                "reserveid": 0,
+                "reserve_date": 0
+            }
+        ],
+        "member": {
+            "uname": "CHAN",
+            "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+        }
+    },
+    "msg": "success"
+}

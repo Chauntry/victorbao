@@ -1,0 +1,255 @@
+{
+    "admin_list": {
+        "result": 1,
+        "data": {
+            "list": [
+                {
+                    "id": "94",
+                    "name": "上海市普陀区123",
+                    "status": "1"
+                },
+                {
+                    "id": "95",
+                    "name": "上海市卢湾区长风",
+                    "status": "0"
+                }
+            ],
+            "promotion": {
+                "id": "94",
+                "name": "上海市普陀区123",
+                "province": "上海市",
+                "city": "上海市",
+                "county": "普陀区",
+                "address": "123",
+                "latitude": "",
+                "longitude": "",
+                "images": [
+                    "https://dn-yaotv.qbox.me/appintv/image/b786efa28ee9d22032d403c9b2eed2fa.jpeg",
+                    "",
+                    ""
+                ],
+                "status": "1",
+                "type": "1",
+                "turn": "1",
+                "telecasts": "1,11,12,13,14",
+                "exchange_address": " ",
+                "exchange_code": " ",
+                "exchange_date": "2016-08-08 18:00:00",
+                "deviceId": "1",
+                "userId": "1",
+                "endDate": "2016-08-08 23:59:59",
+                "rewardDate": "2016-08-09 10:00:53",
+                "pauseFlag": "0",
+                "upload_time": "2016-08-08 11:36:17",
+                "activate_time": "2016-08-08 10:12:34",
+                "created_at": "2016-08-08 10:12:23",
+                "updated_at": "2016-08-08 11:36:17",
+                "restTime": 15299
+            }
+        },
+        "msg": "success"
+    },
+    "default_data": {
+        "result": 1,
+        "data": {
+            "status": 1,
+            "id": 94,
+            "address": "上海市普陀区123",
+            "latitude": "",
+            "longitude": "",
+            "surveyList": [
+                {
+                    "id": 1,
+                    "type": "radio",
+                    "question": "您每天花多长时间看电视？",
+                    "selection": {
+                        "1": "2小时以上",
+                        "2": "1-2小时",
+                        "3": "30分钟",
+                        "4": "基本不看"
+                    }
+                },
+                {
+                    "id": 2,
+                    "type": "radio",
+                    "question": "您最爱看哪档新闻节目？",
+                    "selection": {
+                        "1": "《江苏新时空》",
+                        "2": "《新闻眼》",
+                        "3": "《早安江苏》",
+                        "4": "《新闻360》",
+                        "5": "《新@财经》",
+                        "6": "《通天下》"
+                    }
+                }
+            ],
+            "telecasts": [
+                {
+                    "id": 1,
+                    "name": "我们相爱吧",
+                    "smallImage": null,
+                    "largeImage": null,
+                    "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/wmxab.jpg\"/>\n",
+                    "reserveid": 2642,
+                    "reserve_date": 0
+                },
+                {
+                    "id": 11,
+                    "name": "真心英雄",
+                    "smallImage": null,
+                    "largeImage": null,
+                    "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/realhero.jpg\"/>\n",
+                    "reserveid": 0,
+                    "reserve_date": 0
+                },
+                {
+                    "id": 12,
+                    "name": "我的宝贝",
+                    "smallImage": null,
+                    "largeImage": null,
+                    "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/mybaby.jpg\"/>\n",
+                    "reserveid": 0,
+                    "reserve_date": 0
+                },
+                {
+                    "id": 13,
+                    "name": "加油吧实习生",
+                    "smallImage": null,
+                    "largeImage": null,
+                    "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/sxs.jpg\"/>\n",
+                    "reserveid": 0,
+                    "reserve_date": 0
+                },
+                {
+                    "id": 14,
+                    "name": "减出我人生",
+                    "smallImage": null,
+                    "largeImage": null,
+                    "html": "<img class=\"fadein\" src=\"http://s1.myintv.com.cn/yaojs/ditui/resource/images/jcwrs.jpg\"/>\n",
+                    "reserveid": 0,
+                    "reserve_date": 0
+                }
+            ],
+            "member": {
+                "uname": "CHAN",
+                "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+            }
+        },
+        "msg": "success"
+    },
+    "member_shake": {
+        "data": {
+            "result": 1,
+            "data": {
+                "rollingtime": 30,
+                "time": 123,
+                "list": [
+                    {
+                        "id": 0,
+                        "uname": "Golem0",
+                        "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+                    },
+                    {
+                        "id": 1,
+                        "uname": "Golem1",
+                        "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+                    },
+                    {
+                        "id": 2,
+                        "uname": "Golem2",
+                        "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+                    },
+                    {
+                        "id": 3,
+                        "uname": "Golem3",
+                        "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+                    },
+                    {
+                        "id": 4,
+                        "uname": "Golem4",
+                        "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+                    },
+                    {
+                        "id": 5,
+                        "uname": "Golem5",
+                        "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+                    },
+                    {
+                        "id": 6,
+                        "uname": "Golem6",
+                        "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+                    },
+                    {
+                        "id": 7,
+                        "uname": "Golem7",
+                        "avatar": "https://wx.qlogo.cn/mmopen/ZDDialxveMH1PbpKsAibicvgL2ed5aZa4E94tOM9WRXjxV0KdKYAiaMYejDFaXM55WBaNLzZtqcO3QVQu8zgn1dg17xBiaj8ftB4p"
+                    }
+                ]
+            },
+            "msg": "success"
+        }
+    },
+    "promotion_normal": {
+        "result": 1,
+        "msg": "success"
+    },
+    "promotion_reward": {
+        "result": 1,
+        "msg": "success"
+    },
+    "reward_large": {
+        "result": 1,
+        "data": {
+            "rewards": [
+                {
+                    "id": 220,
+                    "name": "a",
+                    "count": 1,
+                    "sent": 0
+                }
+            ],
+            "time": -30,
+            "rewardId": 0,
+            "status": 1,
+            "prizeStatus": 0
+        },
+        "msg": "success"
+    },
+    "reward_pause": {
+        "result": 1,
+        "msg": "success"
+    },
+    "reward_rand": {
+        "result": 0,
+        "msg": "无有效用户"
+    },
+    "reward_small": {
+        "result": 1,
+        "data": {
+            "rewards": [
+                {
+                    "id": 219,
+                    "name": "q",
+                    "count": 12,
+                    "sent": 0,
+                    "price": 10
+                }
+            ],
+            "isPause": 0,
+            "price": {
+                "remain": 120,
+                "sent": 0,
+                "total": 120
+            },
+            "totalcount": "0",
+            "prizecount": 0,
+            "rate": 100,
+            "newusercount": "0"
+        },
+        "msg": "success"
+    },
+    "reward_update": {
+        "result": 1,
+        "msg": "success"
+    }
+}

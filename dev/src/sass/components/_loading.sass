@@ -1,0 +1,70 @@
+$loading-color: #F3690D
+@keyframes bounce_circularG
+  0%
+    transform: scale(1)
+  100%
+    transform: scale(0.3)
+
+#loading
+  position: fixed
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  display: block
+  z-index: 10001
+  &.hide
+    display: none
+#circularG
+  animation: timer 1250ms infinite linear
+  position: relative
+  width: 90px
+  height: 90px
+  background: transparent
+  background:
+    image: url('~assets/slogo.png')
+    repeat: no-repeat
+    size: 70%
+    position: center
+.circularG
+  position: absolute
+  background-color: #c62829
+  width: 20px
+  height: 20px
+  border-radius: 14px
+  animation: bounce_circularG 1.04s infinite linear
+#circulloadingarG
+  position: relative
+  width: 90px
+  height: 90px
+#circularG_1
+  left: 0
+  top: 35px
+  animation-delay: 0s
+#circularG_2
+  left: 10px
+  top: 10px
+  animation-delay: 0.13s
+#circularG_3
+  top: 0
+  left: 35px
+  animation-delay: 0.26s
+#circularG_4
+  right: 10px
+  top: 10px
+  animation-delay: 0.39s
+#circularG_5
+  right: 0
+  top: 35px
+  animation-delay: 0.52s
+#circularG_6
+  right: 10px
+  bottom: 10px
+  animation-delay: 0.65s
+#circularG_7
+  left: 35px
+  bottom: 0
+  animation-delay: 0.78s
+#circularG_8
+  left: 10px
+  bottom: 10px
+  animation-delay: 0.91s

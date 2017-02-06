@@ -1,0 +1,50 @@
+{
+    "result": 1,
+    "data": {
+        "list": [
+            {
+                "id": "94",
+                "name": "上海市普陀区123",
+                "status": "1"
+            },
+            {
+                "id": "95",
+                "name": "上海市卢湾区长风",
+                "status": "0"
+            }
+        ],
+        "promotion": {
+            "id": "94",
+            "name": "上海市普陀区123",
+            "province": "上海市",
+            "city": "上海市",
+            "county": "普陀区",
+            "address": "123",
+            "latitude": "",
+            "longitude": "",
+            "images": [
+                "https://dn-yaotv.qbox.me/appintv/image/b786efa28ee9d22032d403c9b2eed2fa.jpeg",
+                "",
+                ""
+            ],
+            "status": "1",
+            "type": "1",
+            "turn": "1",
+            "telecasts": "1,11,12,13,14",
+            "exchange_address": " ",
+            "exchange_code": " ",
+            "exchange_date": "2016-08-08 18:00:00",
+            "deviceId": "1",
+            "userId": "1",
+            "endDate": "2016-08-08 23:59:59",
+            "rewardDate": "2016-08-09 10:00:53",
+            "pauseFlag": "0",
+            "upload_time": "2016-08-08 11:36:17",
+            "activate_time": "2016-08-08 10:12:34",
+            "created_at": "2016-08-08 10:12:23",
+            "updated_at": "2016-08-08 11:36:17",
+            "restTime": 15299
+        }
+    },
+    "msg": "success"
+}

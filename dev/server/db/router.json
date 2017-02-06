@@ -1,0 +1,12 @@
+{
+    "/admin/list": "/admin_list",
+    "/default/data": "/default_data",
+    "/member/shake": "/member_shake",
+    "/promotion/normal": "/promotion_normal",
+    "/promotion/reward": "/promotion_reward",
+    "/reward/large": "/reward_large",
+    "/reward/pause": "/reward_pause",
+    "/reward/rand": "/reward_rand",
+    "/reward/small": "/reward_small",
+    "/reward/update": "/reward_update"
+}
