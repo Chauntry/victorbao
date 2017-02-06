@@ -8,7 +8,8 @@ $color-beta: rgba(#e67e22, $unit-delta);
 $color-gamma: rgba(#8e44ad, $unit-delta);
 $color-delta: rgba(#2980b9, $unit-delta);
 
-#loading
+
+#loading {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -17,47 +18,57 @@ $color-delta: rgba(#2980b9, $unit-delta);
   margin: (-$unit-alpha / 2) 0 0 (-$unit-alpha / 2);
   overflow: hidden;
   background: rgba(#000, .35);
-  > div
+
+  > div {
     position: absolute;
     width: $unit-alpha;
     height: $unit-alpha;
     animation: alpha $unit-gamma linear infinite forwards;
     background: $color-alpha;
-    &:nth-child(1)
+
+    &:nth-child(1) {
       top: -$unit-beta;
       left: -$unit-beta;
-    &:nth-child(2)
+    }
+
+    &:nth-child(2) {
       top: -$unit-beta;
       right: -$unit-beta;
-    &:nth-child(3)
+    }
+
+    &:nth-child(3) {
       bottom: -$unit-beta;
       right: -$unit-beta;
-    &:nth-child(4)
+    }
+
+    &:nth-child(4) {
       bottom: -$unit-beta;
       left: -$unit-beta;
+    }
+  }
+}
 
-
-
-
-@keyframes alpha
-  0%
-    transform: rotate(0);
+@keyframes alpha {
+  0% {
+    @include transform(rotate(0));
     background: $color-alpha;
+  }
 
-  25%
+  25% {
     background: $color-beta;
+  }
 
-
-  50%
+  50% {
     border-radius: 50%;
     background: $color-gamma;
+  }
 
-
-  75%
+  75% {
     background: $color-delta;
+  }
 
-
-  100%
-    transform: rotate(360deg);
+  100% {
+    @include transform(rotate(360deg));
     background: $color-alpha;
-
+  }
+}

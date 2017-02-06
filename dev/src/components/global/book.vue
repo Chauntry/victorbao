@@ -16,7 +16,7 @@
         <li> </li>
         <li>
           <div class="page2">
-          I'm study in the University of Manchester, major in computer science. I love computing, I love eating ice cream in winter, I hate reading long article, I play video games like it's my life, my favorite sport is swimming, I my favorite food is garlic pizza and my dream is to make a robot acting like a human being.
+          I'm study in the University of Manchester, majoring in computer science. I love computing, I love eating ice cream in winter, I hate reading long article, I play video games like it's my life, my favorite sport is swimming, my favorite food is garlic pizza and my dream is to make a robot acting like a human being.
           <br>
           <br>
           It is the first time that I develop a self-made website entirely. This website is aim to introducing myself and making friends. If you have any suggestion or question about this website, or you need help to make your own website, please contact me. XD
