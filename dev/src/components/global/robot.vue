@@ -452,7 +452,7 @@ svg#robot {
   }
   #rightArm {
     transform: rotate(0deg);
-    transform-origin: 18% 0%;
+    transform-origin: 8% 0%;
     animation: right 1s ease infinite;
     .forearm {
       transform: rotate(0deg);
