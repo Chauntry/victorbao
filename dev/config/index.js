@@ -8,7 +8,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../../'),
     assetsSubDirectory: 'static',
     // assetsPublicPath: '/yao/jsws/ditui/',
-    assetsPublicPath: process.env.NODE_ENV === 'production' ? '/victorbao/' : '',
+    assetsPublicPath: process.env.NODE_ENV === 'production' ? '/' : '',
     productionSourceMap: false,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
