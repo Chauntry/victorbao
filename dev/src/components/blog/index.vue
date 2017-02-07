@@ -120,7 +120,7 @@ export default {
   },
   ready: function() {
     this.searchedblogData = this.blogData
-    setTimeout(()=>{console.log($(".img").height($(".img").width() * 0.6))}, 0)
+    // setTimeout(()=>{console.log($(".img").height($(".img").width() * 0.6))}, 0)
 
 
 
@@ -178,6 +178,7 @@ export default {
         .img
           position: relative
           height: 0
+          padding-top: 60%
           width: 100%
           overflow: hidden
           background:
