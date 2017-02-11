@@ -8,11 +8,11 @@ Version 2 will contain:
  In general, all for back-end implementing xD. Version 2 plans to be released before Easter this year.
 
 Implementing
-1. index
+- index
   - Adding tips when users wondering how to use the pages.
-2. about
+- about
   - Actually, the map here is a little bit weird
-3. blog
+- blog
   - trying to add a sorting here, but dont known where to put(UI designing)
-4. noticeboard
+- noticeboard
   - It have not been implemted, and should be blocked.
