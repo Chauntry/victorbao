@@ -7,9 +7,9 @@ export function configRouter(router) {
       component: require('components/cookiesindex/index.vue')
     },
 
-    // '/login': {
-    //   component: require('components/login/index.vue')
-    // },
+    '/triple': {
+      component: require('components/triple/index.vue')
+    },
 
     '/notice': {
       component: require('components/notice/index.vue'),
