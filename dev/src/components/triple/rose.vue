@@ -17,7 +17,7 @@
   <div class= "picker-compont">
     <div id="picker-wrapper">
         <div id="picker" :style = "{'background-color': 'rgb(226, 9, 9)'}"></div>
-        <div id="picker-indicator" :style = "{'background-color': 'rgb(226, 9, 9)'}"></div>
+        <div id="picker-indicator"></div>
     </div>
     <div id="slider-wrapper">
         <div id="slider" ></div>
