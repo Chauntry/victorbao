@@ -49,9 +49,9 @@ $creatBlogs = "CREATE TABLE Blogs
 (
 Id int(5) NOT NULL auto_increment,
 LmDate varchar(15),
-Description varchar(15),
+Description varchar(50),
 View int(8),
-Pic varchar(50),
+Pic varchar(200),
 comments int(5),
 Article blob,
 PRIMARY KEY  (`id`)
@@ -62,6 +62,7 @@ $creatComments = "CREATE TABLE Comments
 c_id int(5) NOT NULL auto_increment,
 Blog_id int(5) NOT NULL,
 User_id int(5) NOT NULL,
+LmDate varchar(15),
 Content varchar(200),
 PRIMARY KEY  (`c_id`)
 )";

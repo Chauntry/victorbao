@@ -18,17 +18,14 @@ mysql_select_db("my_db", $con);
 
 $result = mysql_query("SELECT LmDate, Description,View,comments,Pic FROM Blogs");
 
+$Array=array();
 
-while ($row = mysql_fetch_array($result, MYSQL_BOTH)) {
-   printf ("%s %s", $row[0], $row[1],$row[2],$row[3],$row[4]);
+$i=0;
+while($row=mysql_fetch_array($result,MYSQL_ASSOC)){
+  $Array[$i]=$row;
+  $i++;
 }
 
-
-// $Array = array(
-//   'con' => $string,
-//   'result' => $result
-// );
-
-// $jsdata = json_encode($Array);
-// echo $jsdata;
+$jsdata = json_encode($Array);
+echo $jsdata;
 ?>

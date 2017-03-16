@@ -1,7 +1,10 @@
 <template lang="html">
 
   <div id="loginform">
-    <div id="facebook" @click = "$route.router.go('/about')"><i class="fa fa-facebook"></i><div id="connect">Connect with Facebook</div></div>
+    <div id="facebook"><i class="fa fa-facebook"></i>
+    <div id="connect">Connect with Facebook</div>
+
+    </div>
     <div id="mainlogin">
     <div id="or">or</div>
     <h1>Log in with your account</h1>
@@ -63,9 +66,9 @@ export default {
 
   },
   ready () {
+
   },
   beforeDestroy () {
-
   }
 }
 </script>

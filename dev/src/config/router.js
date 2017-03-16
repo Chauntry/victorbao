@@ -11,6 +11,10 @@ export function configRouter(router) {
       component: require('components/triple/index.vue')
     },
 
+    '/triple/eye': {
+      component: require('components/triple/eye.vue')
+    },
+
     '/notice': {
       component: require('components/notice/index.vue'),
     },
@@ -19,6 +23,9 @@ export function configRouter(router) {
     },
     '/about': {
       component: require('components/about/index.vue'),
+    },
+    '/register': {
+      component: require('components/register/index.vue'),
     },
     // '/cpanel': {
     //   component: require('components/cpanel/index.vue'),

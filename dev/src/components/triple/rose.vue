@@ -1,5 +1,5 @@
 <template lang="html">
-
+<div class="app">
   <div class = "rose">
 <!--     <div class = "petal" v-for = "i in 30" :style = "{'background-image':'radial-gradient(bottom left, ellipse cover, red 0%, blue 70%, red 95%)'}"></div> -->
     <div class = "petal" v-for = "i in 30" :style = "{'background-image':'-webkit-radial-gradient(bottom left, ellipse cover,' + roselight +' 0%, ' + rosedark + ' 70%, '+ roselight+ ' 95%)'}"></div>
@@ -15,8 +15,7 @@
       </g>
   </svg>
   <div class= "picker-compont">
-    <div id="picker-wrapper">
-        <div id="picker" :style = "{'background-color': 'rgb(226, 9, 9)'}"></div>
+    <div id="picker-wrapper">        <div id="picker" :style = "{'background-color': 'rgb(226, 9, 9)'}"></div>
         <div id="picker-indicator"></div>
     </div>
     <div id="slider-wrapper">
@@ -24,6 +23,7 @@
         <div id="slider-indicator"></div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
