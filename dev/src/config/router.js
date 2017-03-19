@@ -14,6 +14,10 @@ export function configRouter(router) {
     '/triple/eye': {
       component: require('components/triple/eye.vue')
     },
+    '/triple/eye-animation': {
+      component: require('components/triple/eye-animation.vue')
+    },
+
 
     '/notice': {
       component: require('components/notice/index.vue'),
