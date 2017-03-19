@@ -94,10 +94,10 @@ export default {
     top: 50%
     left: 50%
     .eye-part1
-      transform-origin: 50% 97%
+      transform-origin: 50% 95%
       position: absolute
       top: 1%
-      left: 0
+      left: -0.4%
       z-index: 2
       width: 100%
       height: 14%
