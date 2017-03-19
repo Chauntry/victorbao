@@ -5,7 +5,7 @@
     .eye-part2
       .eye-wrapped(:style = "{height: eyeball + '%'}")
     .eye-part3
-    .eye-part4(:style = "{transform: 'rotateX(' + eyeDeg + 'deg)'}" , v-if = "eyeDeg > 90")
+    .eye-part4(:style = "{transform: 'rotateX(' + eyeDeg + 'deg)'}" , v-if = "eyeDeg >= 90")
 </template>
 
 <script>
