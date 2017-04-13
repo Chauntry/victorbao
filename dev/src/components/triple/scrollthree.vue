@@ -168,7 +168,7 @@ export default {
       let speed = disofmoving / (this.InitialClk - this.counter)
       let deg
 
-      if(disofmoving>= -150 && disofmoving<= 150){
+      if(disofmoving>= -180 && disofmoving<= 180){
         this.trasnitionControl = 'transform 0s'
         deg = Math.asin(disofmoving / 200) * 180 / Math.PI
         this.countTransform(deg)
