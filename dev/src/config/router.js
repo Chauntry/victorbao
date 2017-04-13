@@ -12,13 +12,20 @@ export function configRouter(router) {
     },
 
     '/triple/eye': {
-      component: require('components/triple/eye.vue')
+      component: require('components/triple/eye-marilyn.vue')
     },
     '/triple/eye-animation': {
       component: require('components/triple/eye-animation.vue')
     },
-
-
+    '/triple/display': {
+      component: require('components/triple/display.vue')
+    },
+    '/triple/jewelry': {
+      component: require('components/triple/jewelry.vue')
+    },
+    '/scrollthree': {
+      component: require('components/triple/scrollthree.vue'),
+    },
     '/notice': {
       component: require('components/notice/index.vue'),
     },
@@ -31,13 +38,16 @@ export function configRouter(router) {
     '/register': {
       component: require('components/register/index.vue'),
     },
+
+
+
     // '/cpanel': {
     //   component: require('components/cpanel/index.vue'),
     // },
-    // '/smallprize/:id': {
-    //   name: 'smallprize',
-    //   component: require('components/smallprize/index.vue'),
-    // },
+    '/triple/jewelry/:id': {
+      name: 'jewelry',
+      component: require('components/triple/jewelryobj.vue')
+    },
     // '/bigprize/:id': {
     //   name: 'bigprize',
     //   component: require('components/bigprize/index.vue'),

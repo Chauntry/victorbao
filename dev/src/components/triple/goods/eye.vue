@@ -1,12 +1,16 @@
 <template lang="jade">
-.app
-  eye(:eye-height = "eyeHeight")
+.eye(:style="{height: eyeHeight +'px', width: eyeHeight*0.56 +'px',transform:'translate(-'+ eyeHeight/2 * 0.56+'px ,-'+ eyeHeight /2 +'px)'}")
+  .eye-part1(:style = "{transform: 'rotateX(' + eyeDeg + 'deg)'}")
+  .eye-part2
+    .eye-wrapped(:style = "{height: eyeball + '%'}")
+  .eye-part3
+  .eye-part4(:style = "{transform: 'rotateX(' + eyeDeg + 'deg)'}" , v-if = "eyeDeg >= 90")
+  slot
 </template>
 
 <script>
 import * as actions from 'vuex/actions'
-import eye from 'components/triple/goods/eye.vue'
-import $ from 'jquery'
+
 export default {
   vuex: {
     getters: {
@@ -15,41 +19,59 @@ export default {
     actions
   },
   components: {
-    eye
+
   },
   data() {
     return {
-      eyecolor: '#fff',
-      marilynHeight: 0,
-      clientHeight: 0,
-      eyeHeight: 0,
       eyeDeg: 0,
       eyeball: 100,
-      cookies: [
-        {id: 'eye1', location: [65, 362]},
-        {id: 'eye2', location: [-28, 357]},
-      ],
-      touching: null,
-      mouseDownLocation: [0, 0],
-      mouseCurrentLocation: [0, 0],
     }
   },
   props: {
+    eyeHeight: {
+      type: Number,
+      default: 100
+    },
+    eyecolor: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
+    eyelidDown() {
+      let eyeTimer = setInterval(() =>{
+        if (this.eyeDeg < 180) {
+          this.eyeDeg = this.eyeDeg + 1
+          this.eyeball = Math.round(100 * (180 - this.eyeDeg) / 180)
+        }
+        else {
+          clearInterval(eyeTimer)
+          setTimeout (() => {this.eyelidUp()},1000)
+        }
+      }, 15);
+    },
+    eyelidUp() {
+      let eyeTimer = setInterval(() =>{
+        if (this.eyeDeg > 0) {
+          this.eyeDeg = this.eyeDeg - 1
+          this.eyeball = Math.round(100 * (180 - this.eyeDeg) / 180)
+        }
+        else {
+          clearInterval(eyeTimer)
+        }
+      }, 15);
+    },
   },
+
   computed: {
   },
   route: {
+
   },
   created () {
   },
   ready () {
-    this.eyelidDown()
-    this.clientHeight = document.body.clientHeight
-    this.marilynHeight = this.clientHeight * 0.6
-    this.eyeHeight = this.clientHeight * 0.6
-    this.eyecolor = this.$route.query.eyecolor ? this.$route.query.eyecolor : this.eyecolor
+    setInterval (() => {this.eyelidDown()},6000)
   },
   beforeDestroy () {
   }
@@ -57,9 +79,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.app
-  position: relative
-  background-color: #184867
   .eye
     position: absolute
     top: 50%
