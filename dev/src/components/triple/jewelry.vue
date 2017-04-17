@@ -2,7 +2,7 @@
 <div class= "app">
   <div id="ecrin-header">
   <navtool></navtool>
-   <a class="logo">LOGO</a>
+   <a class="logo">Triple</a>
   </div>
 
   <div id="page" class="page">
