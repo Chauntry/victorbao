@@ -99,10 +99,6 @@ export default {
         background: #75A2A2
         transition: all 0.3s
 
-        // &:hover
-        //   background: #FFC600
-        //   transform: translate3d(0,0,0.5rem)
-        //   box-shadow: 0.75rem 0.75rem 0.75rem rgba(0,0,0,0.5)
       .faketitle
         position: relative
         width: 5rem
