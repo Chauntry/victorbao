@@ -15,6 +15,11 @@ export const getData = ({ dispatch }, cb) => {
 //   }, 1000)
 // }
 
+export const copyPageIndex = ({ dispatch }, json) => {
+  dispatch('PAGEINDEX', json)
+}
+
+
 
 export const registerState = function () {
   App.showLoading()

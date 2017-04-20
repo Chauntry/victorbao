@@ -2,14 +2,14 @@
 .cp-recommend-index
   .wrap
     .scroll(@touchstart="touchstart", @touchmove= "touchmove", @touchend= "touchend", id="roll")
-      .left(:style="{transform:styleForleft , 'z-index': indexForleft,'background-image': contentForleft[1], 'transition': trasnitionControl}")
-      .mid(:style="{transform: styleFormid , 'z-index': indexFormid,'background-image': contentFormid[1], 'transition': trasnitionControl}")
-      .right(:style="{transform: styleForright, 'z-index': indexForright,'background-image': contentForright[1], 'transition': trasnitionControl}")
+      .left(:style="{transform:styleForleft , 'z-index': indexForleft * 100,'background-image': contentForleft[1], 'transition': trasnitionControl}")
+      .mid(:style="{transform: styleFormid , 'z-index': indexFormid * 100,'background-image': contentFormid[1], 'transition': trasnitionControl}")
+      .right(:style="{transform: styleForright, 'z-index': indexForright * 100,'background-image': contentForright[1], 'transition': trasnitionControl}")
     //- .scroll(@touchstart="touchstart", @touchmove= "touchmove", @touchend= "touchend", id="roll")
     //-   .left(:style="{transform:styleForleft , 'z-index': indexForleft, '-webkit-filter':brightForleft,'background-image': contentForleft[1], 'transition': trasnitionControl}")
     //-   .mid(:style="{transform: styleFormid , 'z-index': indexFormid, '-webkit-filter':brightFormid,'background-image': contentFormid[1], 'transition': trasnitionControl}")
     //-   .right(:style="{transform: styleForright, 'z-index': indexForright,'-webkit-filter':brightForright,'background-image': contentForright[1], 'transition': trasnitionControl}")
-    scrollnav(v-if="indexOfCenter+1",:needi = "4",:index="indexOfCenter + 1", :bottom = "1")
+    scrollnav(v-if="indexOfCenter+1",:needi = "photos.length",:index="indexOfCenter + 1", :bottom = "1")
 </template>
 
 <script>
@@ -54,19 +54,10 @@ export default {
       forcemoving: false,
       x: 0,
       y: 0,
-      recommendlist: [
-      { text: '1'},
-      { text: '2'},
-      { text: '3'},
-      { text: '4'},
-      ],
+      recommendlist: this.photos,
       list : {
         prog: {
-          rcmd : ['http://m.dior.com/couture/ecommerce/media/catalog/product/cache/1/alt_image_2/2250x/7b8fef0172c2eb72dd8fd366c999954c/J/R/JRDV95038_0000_V1_M.jpg',
-          'http://m.dior.com/couture/ecommerce/media/catalog/product/cache/1/alt_image_3/2250x/7b8fef0172c2eb72dd8fd366c999954c/J/R/JRDV95038_0000_V2_M.jpg' ,
-          'http://m.dior.com/couture/ecommerce/media/catalog/product/cache/1/alt_image_2/2250x/7b8fef0172c2eb72dd8fd366c999954c/J/R/JRDV95003_0000_V1_M.jpg?___store=en_gb_mobile' ,
-          'http://m.dior.com/couture/ecommerce/media/catalog/product/cache/1/alt_image_1/425x/7b8fef0172c2eb72dd8fd366c999954c/J/R/JRDV95003_0000_V0_M.jpg'
-          ]
+          rcmd : this.photos
         }
       },
      // this.list.prog.rcmd[this.indexOfCenter].series.poster
@@ -76,7 +67,14 @@ export default {
       ]
     }
   },
-
+  props: {
+    photos: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+  },
   methods: {
 
     // this part is used to adjust
@@ -228,24 +226,24 @@ export default {
     },
     countStyleForleft (deg) {
       let string = ''
-      if (this.indexOf3 === 1) string = 'rotateY(' +( 300 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
+      if (this.indexOf3 === 1) string = 'rotateY(' +( 285 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
       else if (this.indexOf3 === 0) string = 'rotateY(' + deg + 'deg) translateZ(12.5rem) scale(1)'
-      else string = 'rotateY('+ (60 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
+      else string = 'rotateY('+ (75 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
       this.styleForleft = string
     },
 
     countStyleFormid (deg) {
       let string = ''
       if (this.indexOf3 === 1) string = 'rotateY(' + deg + 'deg) translateZ(12.5rem) scale(1)'
-      else if (this.indexOf3 === 0) string = 'rotateY('+( 60 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
-      else string = 'rotateY(' +( 300 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
+      else if (this.indexOf3 === 0) string = 'rotateY('+( 75 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
+      else string = 'rotateY(' +( 285 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
       this.styleFormid = string
     },
 
     countStyleForright (deg) {
       let string = ''
-      if (this.indexOf3 === 1) string = 'rotateY('+( 60 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
-      else if (this.indexOf3 === 0) string = 'rotateY(' + (300 + deg) + 'deg) translateZ(12.5rem) scale(0.85)'
+      if (this.indexOf3 === 1) string = 'rotateY('+( 75 + deg )+ 'deg) translateZ(12.5rem) scale(0.85)'
+      else if (this.indexOf3 === 0) string = 'rotateY(' + (285 + deg) + 'deg) translateZ(12.5rem) scale(0.85)'
       else string = 'rotateY(' + deg + 'deg) translateZ(12.5rem) scale(1)'
       this.styleForright = string
     },
@@ -312,9 +310,7 @@ export default {
       }
       return [string, 'url(' + poster + ')']
     },
-
-// =================== return a object should be better ================
-// =====================================================================
+    // =====================================================================
     indexForleft () {
       let string = ''
       if (this.indexOf3 === 1) string = '1'
@@ -338,7 +334,7 @@ export default {
       else string = '2'
       return string
     },
-//=======================================================
+    //=======================================================
 
     brightForleft () {
       let string = ''
@@ -363,8 +359,8 @@ export default {
       else string = 'brightness(1)'
       return string
     },
-// =================== End style count ===========================
-// ===============================================================
+  // =================== End style count ===========================
+  // ===============================================================
   },
   created () {
     this.trasnitionControl = 'transform 0s'
@@ -374,19 +370,7 @@ export default {
     root: '/root'
   },
   ready () {
-  var p=0,t=0;
-  // $("#app").scroll(function(e){
-  //   console.log($("#app").scrollTop())
-  //   p = $("#app").scrollTop();
-  //   if(t<=p && t> 1){
-  //    //  console.log(1)
-  //   }
-  //   else{
-  //     //  console.log(2)
-  //   }
-  //   setTimeout(function(){t = p;},0);
-  // });
-
+    $("#app").scrollTop(0);
   },
   beforeDestroy () {
 
@@ -409,7 +393,7 @@ export default {
       position: relative
       width: r(600)
       height: r(600)
-      perspective: r(4000)
+      perspective: r(3000)
       div
         position: absolute
         left: r(0)

@@ -14,52 +14,43 @@
 
      <div id="ecrin-search-form" class="search-form js-autocomplete-form">
           <div class = "icon"> </div>
-      <input type="text" class="text autocomplete-input js-autocomplete-input" name="q" placeholder="Search..." autocomplete="off" />
-      <input type="hidden" class="js-input-hidden-origin" name="origin" value="" />
+      <input type="text" class="text autocomplete-input js-autocomplete-input" name="q" placeholder="Search..." autocomplete="off" v-model="searchMsg"/>
       <ul class="autocomplete-list js-autocomplete-list"></ul>
       <input type="submit" class="ok" value="OK" />
      </div>
     </div>
 
-    <div id="wrapper" class="page-home-news" data-page="home-news" data-track-univers="CDC" data-track-page="PDG">
+    <div v-if= "!searchMsg" id="wrapper" class="page-home-news" data-page="home-news" data-track-univers="CDC" data-track-page="PDG">
       <div class="padded-content border-bottom">
         <h1 class="title centered">
         <span>triple he</span> recommend </h1>
         <!-- START New Campaigns -->
-        <a class="new-campaign" href="#/triple/jewelry/1">
-          <img src="./Nouveaut&eacute;s_files/jewellery-collections_reference.jpg" />
+        <a v-for="item in recom" class="new-campaign" href="#/triple/jewelry/{{item.id}}">
+          <img :src="item.photos[0]"/>
           <h2>
-            <span>collections</span>
-            <p>Rose des vents</p>
-          </h2>
-        </a>
-
-        <a class="new-campaign" href="#/triple/jewelry/1">
-          <img src="./Nouveaut&eacute;s_files/jewellery-collections_reference(1).jpg" />
-          <h2>
-          <span>Jewellery collections</span>
-          <p>Archi Dior</p>
+            <span>{{item.descr}}</span>
+            <p>{{item.name}}</p>
           </h2>
         </a>
       </div>
     </div>
 
 
-    <div class="gamme-grid" style="margin-top: 3rem">
-      <h3> <span>THE COLLECTION</span> </h3>
+    <div class="gamme-grid" :style="{searchMsg ? '' : {'margin-top': '3rem'}}">
+      <h3 v-if= "!searchMsg" > <span>THE COLLECTION</span> </h3>
       <ul data-category="Rose_des_vents" class="js-category">
-        <li v-for="item in items">
+        <li v-for="item in searchItems">
           <a href="#/triple/jewelry/{{item.id}}" class="packshot">
-          <img src="{{item.photos[0]}}"/></a>
-
+          <img :src="item.photos[0]"/></a>
           <div>
-           <a href="#/triple/jewelry/{{id}}">
+           <a href="#/triple/jewelry/{{item.id}}">
              <h4> {{item.name}} </h4>
              <p></p>
              <span class="price" v-html= "item.price">{{item.price}}</span>
            </a>
           </div>
         </li>
+
       </ul>
     </div>
 
@@ -104,9 +95,9 @@ import eye from 'components/triple/goods/eye.vue'
 export default {
   vuex: {
     getters: {
-      count: state => state.index.count,
     },
-    actions
+    actions: {
+    }
   },
   components: {
     eye,
@@ -114,9 +105,11 @@ export default {
   },
   data() {
     return {
+      searchMsg: '',
       clientHeight: 0,
       clientWidth: 0,
       items: [],
+      recom: []
     }
   },
   props: {
@@ -127,6 +120,16 @@ export default {
     }
   },
   computed: {
+    searchItems() {
+      if (this.searchMsg == '') return this.items
+      let list = []
+      for (let i in this.items) {
+        if (this.items[i].name.search(this.searchMsg) != -1){
+          list.push(this.items[i])
+        }
+      }
+      return list
+    }
   },
   route: {
   },
@@ -136,8 +139,9 @@ export default {
         type: 'GET',
         dataType: "json",
         success: (response) => {
-          console.log(response.items)
+          // console.log(response)
           this.items = response.items
+          this.recom = response.recom
         }
     });
   },

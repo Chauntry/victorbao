@@ -5,21 +5,22 @@ $host = "http://www.victorbao.co.uk/data";
 $json='
 {
   "version": "1.1",
+  "suggestion": [1,3,4],
   "recom": [
     {
       "id" : 1,
       "name" : "stud blablablablabla",
       "descr": "describe of stud ...",
       "photos" : [
-        "'.$host.'/recom/1.jpg",
+        "'.$host.'/0_recom/1.jpg"
       ]
     },
     {
-      "id" : 7,
+      "id" : 6,
       "name" : "glove blablablablabla",
       "descr": "describe of glove ...",
       "photos" : [
-        "'.$host.'/recom/2.png",
+        "'.$host.'/0_recom/2.png"
       ]
     }
   ],
@@ -37,7 +38,7 @@ $json='
         "'.$host.'/1_stud/6.jpg",
         "'.$host.'/1_stud/7.jpg",
         "'.$host.'/1_stud/8.jpg",
-        "'.$host.'/1_stud/9.jpg",
+        "'.$host.'/1_stud/9.jpg"
       ]
     },
     {

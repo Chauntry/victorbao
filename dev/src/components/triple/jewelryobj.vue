@@ -14,51 +14,47 @@
 
      <div id="ecrin-search-form" class="search-form js-autocomplete-form">
           <div class = "icon"> </div>
-      <input type="text" class="text autocomplete-input js-autocomplete-input" name="q" placeholder="Search..." autocomplete="off" />
-      <input type="hidden" class="js-input-hidden-origin" name="origin" value="" />
+      <input type="text" class="text autocomplete-input js-autocomplete-input" name="q" placeholder="Search..." autocomplete="off" v-model="searchMsg"/>
       <ul class="autocomplete-list js-autocomplete-list"></ul>
       <input type="submit" class="ok" value="OK" />
      </div>
     </div>
-   <div id="menuOverlay"></div>
-   <h3> ROSE DES VENTS RING 18K YELLOW GOLD, DIAMOND AND MOTHER-OF-PEARL</h3>
-   <div id="scroll"><scroll></scroll>
+
+   <div v-if= "!searchMsg" id="menuOverlay"></div>
+   <h3 v-if= "!searchMsg" v-html= "displayItem.name" > {{displayItem.name}} </h3>
+   <div v-if= "!searchMsg" id="scroll"><scroll v-if= "displayItem.photos" :photos= "displayItem.photos"></scroll>
 
     </div>
 
-    <h1>&pound;2 650.00</h1>
+    <h1 v-if= "!searchMsg" v-html="displayItem.price" >
+      {{displayItem.price == 'N/A' ? '' : displayItem.price}}
+    </h1>
 
+    <div class="gamme-grid" :style="{searchMsg ? '' : {'margin-top': '3rem'}}">
+      <h3 v-if= "!searchMsg" > <span>SUGGESTIONS</span> </h3>
 
-    <div class="gamme-grid" style="margin-top: 3rem">
-      <h3> <span>SUGGESTIONS</span> </h3>
       <ul data-category="Rose_des_vents" class="js-category">
-        <li>
-          <a href="#/triple/jewelry/1" class="packshot"><img src="./Rings_files/JRDV95038_0000_V5.jpg" alt="" /></a>
+        <li v-if= "!searchMsg" v-for="id in pageIndex.suggestion">
+          <a href="#/triple/jewelry/{{id}}" class="packshot" @click = "reload(id)" >
+          <img :src="findDisplayItem(id).photos[0]" alt="" /></a>
           <div>
-           <a href="#/triple/jewelry/1">
-             <h4> ROSE DES VENTS RING, 18K YELLOW GOLD, DIAMOND AND MOTHER-OF-PEARL </h4>
+           <a  href="#/triple/jewelry/{{id}}" @click = "reload(id)">
+             <h4> {{findDisplayItem(id).name}} </h4>
              <p></p>
-             <span class="price">&pound;2 300.00</span>
+             <span class="price" v-html="findDisplayItem(id).price">
+               {{findDisplayItem(id).price}}
+             </span>
            </a>
           </div>
         </li>
-        <li>
-          <a href="#/triple/jewelry/1" class="packshot"><img src="./Rings_files/JRDV95039_0000_V5.jpg" alt="" /> </a>
+        <li v-if= "searchMsg" v-for="item in searchItems">
+          <a @click = "reload(item.id)" href="#/triple/jewelry/{{item.id}}" class="packshot">
+          <img :src="item.photos[0]"/></a>
           <div>
-            <a href="#/triple/jewelry/1">
-              <h4> ROSE DES VENTS RING, 18K YELLOW GOLD, DIAMOND AND TURQUOISE </h4>
-              <p></p>
-              <span class="price">&pound;2 650.00</span>
-            </a>
-          </div>
-        </li>
-        <li>
-          <a href="#/triple/jewelry/1" class="packshot"> <img src="./Rings_files/JRDV95040_0000_V5.jpg" alt="" /> </a>
-          <div>
-           <a href="#/triple/jewelry/1">
-           <h4> ROSE DES VENTS RING, 18K WHITE GOLD, DIAMOND AND MOTHER-OF-PEARL </h4>
-           <p></p>
-           <span class="price">&pound;2 500.00</span>
+           <a @click = "reload(item.id)" href="#/triple/jewelry/{{item.id}}">
+             <h4> {{item.name}} </h4>
+             <p></p>
+             <span class="price" v-html= "item.price">{{item.price}}</span>
            </a>
           </div>
         </li>
@@ -119,7 +115,10 @@ export default {
   },
   data() {
     return {
-            fold : true,
+      searchMsg: '',
+      pageIndex: {},
+      displayItem: {},
+      fold : true,
       predisplayControl: {
         eye : 0,
         other : 0
@@ -140,19 +139,49 @@ export default {
   props: {
   },
   methods: {
-    over() {
-
+    findDisplayItem( id ) {
+      for (let i in this.pageIndex.items) {
+        if (this.pageIndex.items[i].id == id)
+          return this.pageIndex.items[i]
+      }
+      return {}
+    },
+    reload(id) {
+      console.log(111)
+      this.searchMsg = ''
+      this.displayItem = {}
+      setTimeout(()=> {this.displayItem = this.findDisplayItem(id)},10)
     }
   },
   computed: {
+    searchItems() {
+      if (this.searchMsg == '') return this.pageIndex.items
+      let list = []
+      for (let i in this.pageIndex.items) {
+        if (this.pageIndex.items[i].name.search(this.searchMsg) != -1){
+          list.push(this.pageIndex.items[i])
+        }
+      }
+      return list
+    }
   },
   route: {
   },
   created () {
+    $.ajax({
+        url: "http://www.victorbao.co.uk/data/index.php",
+        type: 'GET',
+        dataType: "json",
+        success: (response) => {
+          // console.log(response)
+          this.pageIndex = response
+          //this.pageIndex.suggestion = [1,3,4]
+          this.displayItem = this.findDisplayItem(this.$route.params.id)
+          console.log(this.displayItem)
+        }
+    });
   },
   ready () {
-    console.log(this.$route.params.id)
-
 
   var p=0,t=0;
   $("#app").scroll(function(e){
@@ -200,7 +229,8 @@ export default {
 }
 h3 {
   font-weight: normal;
-    text-align: center;
+  text-align: center;
+  text-transform: uppercase;
 }
 h4 {
   font-weight: normal;

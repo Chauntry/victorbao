@@ -1,5 +1,6 @@
 // initial state
 const state = {
+  pageIndex: {},
   questiondata: {},
   telecasts: [],
   member: [],
@@ -7,6 +8,9 @@ const state = {
 
 // mutations
 const mutations = {
+  PAGEINDEX (state, obj) {
+    state.pageIndex = obj
+  },
   TELE (state, obj) {
     state.telecasts = obj
   },
@@ -16,21 +20,6 @@ const mutations = {
   QUE (state, obj) {
     state.questiondata = obj
   }
-  // SETSTATE1 (state, number){
-  //   state.state1 = number
-  // },
-  // SETSTATE2 (state, number){
-  //   state.state2 = number
-  // },
-  // SETDIFFT1 (state, string){
-  //   state.difft1 = string
-  // },
-  // SETDIFFT2 (state, string){
-  //   state.difft2 = string
-  // },
-  // SETCPOG (state, string){
-  //   state.currentprog = string
-  // }
 }
 
 export default {
