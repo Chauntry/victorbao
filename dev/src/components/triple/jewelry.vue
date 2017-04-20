@@ -24,12 +24,12 @@
     <div id="wrapper" class="page-home-news" data-page="home-news" data-track-univers="CDC" data-track-page="PDG">
       <div class="padded-content border-bottom">
         <h1 class="title centered">
-        <span>News</span> Jewellery </h1>
+        <span>triple he</span> recommend </h1>
         <!-- START New Campaigns -->
         <a class="new-campaign" href="#/triple/jewelry/1">
           <img src="./Nouveaut&eacute;s_files/jewellery-collections_reference.jpg" />
           <h2>
-            <span>Jewellery collections</span>
+            <span>collections</span>
             <p>Rose des vents</p>
           </h2>
         </a>
@@ -48,38 +48,21 @@
     <div class="gamme-grid" style="margin-top: 3rem">
       <h3> <span>THE COLLECTION</span> </h3>
       <ul data-category="Rose_des_vents" class="js-category">
-        <li>
-          <a href="#/triple/jewelry/1" class="packshot"><img src="./Rings_files/JRDV95038_0000_V5.jpg" alt="" /></a>
+        <li v-for="item in items">
+          <a href="#/triple/jewelry/{{item.id}}" class="packshot">
+          <img src="{{item.photos[0]}}"/></a>
+
           <div>
-           <a href="#/triple/jewelry/1">
-             <h4> ROSE DES VENTS RING, 18K YELLOW GOLD, DIAMOND AND MOTHER-OF-PEARL </h4>
+           <a href="#/triple/jewelry/{{id}}">
+             <h4> {{item.name}} </h4>
              <p></p>
-             <span class="price">&pound;2 300.00</span>
-           </a>
-          </div>
-        </li>
-        <li>
-          <a href="#/triple/jewelry/1" class="packshot"><img src="./Rings_files/JRDV95039_0000_V5.jpg" alt="" /> </a>
-          <div>
-            <a href="#/triple/jewelry/1">
-              <h4> ROSE DES VENTS RING, 18K YELLOW GOLD, DIAMOND AND TURQUOISE </h4>
-              <p></p>
-              <span class="price">&pound;2 650.00</span>
-            </a>
-          </div>
-        </li>
-        <li>
-          <a href="#/triple/jewelry/1" class="packshot"> <img src="./Rings_files/JRDV95040_0000_V5.jpg" alt="" /> </a>
-          <div>
-           <a href="#/triple/jewelry/1">
-           <h4> ROSE DES VENTS RING, 18K WHITE GOLD, DIAMOND AND MOTHER-OF-PEARL </h4>
-           <p></p>
-           <span class="price">&pound;2 500.00</span>
+             <span class="price" v-html= "item.price">{{item.price}}</span>
            </a>
           </div>
         </li>
       </ul>
     </div>
+
 
 
     <div id="ecrin-footer" data-role="footer" class="ecrin-global ecrin-white-footer">
@@ -131,22 +114,9 @@ export default {
   },
   data() {
     return {
-            fold : true,
-      predisplayControl: {
-        eye : 0,
-        other : 0
-      },
-      displayControl: {
-        eye : 0,
-        other : 0
-      },
-      eyecolor: '#fff',
       clientHeight: 0,
       clientWidth: 0,
-      eyeHeight: 0,
-      touching: null,
-      mouseDownLocation: [0, 0],
-      mouseCurrentLocation: [0, 0],
+      items: [],
     }
   },
   props: {
@@ -161,6 +131,15 @@ export default {
   route: {
   },
   created () {
+    $.ajax({
+        url: "http://www.victorbao.co.uk/data/index.php",
+        type: 'GET',
+        dataType: "json",
+        success: (response) => {
+          console.log(response.items)
+          this.items = response.items
+        }
+    });
   },
   ready () {
 
@@ -176,12 +155,9 @@ export default {
     setTimeout(function(){t = p;},0);
   });
 
-
     this.clientHeight = document.body.clientHeight
     this.clientWidth = document.body.clientWidth
-    this.marilynHeight = this.clientHeight * 0.6
-    this.eyeHeight = this.clientHeight * 0.6
-    this.eyecolor = this.$route.query.eyecolor ? this.$route.query.eyecolor : this.eyecolor
+
     $(".trigger").click(function() {
       $(".menu").toggleClass("active");
       this.fold = this.fold ? false : true
