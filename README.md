@@ -1,4 +1,6 @@
 # victorbao
+Add /triple
+
 This is victorbao.co.uk version 1, which released at 2017-Feb-7, there is only static pages in v1.
 Version 2 will contain:
  - Log in feature
