@@ -51,7 +51,7 @@
           <img :src="item.photos[0]"/></a>
           <div>
            <a href="#/triple.mobile/jewelry/{{item.id}}">
-             <h4> {{item.name}} </h4>
+             <h4 v-html= "item.name"> {{item.name}} </h4>
              <p></p>
              <span class="price" v-html= "item.price">{{item.price}}</span>
            </a>
@@ -140,11 +140,26 @@ export default {
   },
   computed: {
     searchItems() {
+      let startString = '<span style="background-color: #d7d7bc">'
+      let endString = '</span>'
+
+      console.log(this.searchMsg)
       if (this.searchMsg == '') return this.items
+            let items = this.items
       let list = []
-      for (let i in this.items) {
-        if (this.items[i].name.search(this.searchMsg) != -1){
-          list.push(this.items[i])
+      for (let i in items) {
+        items[i].name = items[i].name.split(startString).join('')
+        items[i].name = items[i].name.split(endString).join('')
+        console.log(items[i].name)
+        if (items[i].name.toUpperCase().search(this.searchMsg.toUpperCase()) != -1){
+          let split =items[i].name.toUpperCase().split(this.searchMsg.toUpperCase())
+
+          let newItem = split[0]
+          for (let i = 1; i < split.length; i++) {
+            newItem = newItem + startString + this.searchMsg.toUpperCase() + endString + split[i]
+          }
+          items[i].name = newItem
+          list.push(items[i])
         }
       }
       return list
@@ -204,7 +219,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 
 .app {
   position: relative;
@@ -241,6 +256,9 @@ h2 {
 
 }
 
+#em {
+  background-color: yellow;
+}
 .menulist{
   position: absolute;
   transform: translateX(110%);
@@ -433,8 +451,10 @@ h1 {
 .gamme-grid {
   clear: both;
   color: #8e8e8e;
-  font-family: "Century Gothic","Futura",sans-serif
+  font-family: "Century Gothic","Futura",sans-serif;
 }
+
+
 
 .gamme-grid a {
   color: #8e8e8e;

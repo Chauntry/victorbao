@@ -65,7 +65,7 @@ Ur Task
           </div>
           <div>
            <a @click = "reload(item.id)" href="#/triple/jewelry/{{item.id}}">
-             <h1> {{item.name}} </h4>
+             <h1 v-html="item.name"> {{item.name}} </h4>
              <p></p>
              <span class="price" v-html= "item.price">{{item.price}}</span>
            </a>
@@ -173,11 +173,26 @@ export default {
   },
   computed: {
     searchItems() {
+      let startString = '<span style="background-color: #d7d7bc">'
+      let endString = '</span>'
+
+      console.log(this.searchMsg)
+      let items = this.pageIndex.items
       if (this.searchMsg == '') return this.pageIndex.items
       let list = []
-      for (let i in this.pageIndex.items) {
-        if (this.pageIndex.items[i].name.search(this.searchMsg) != -1){
-          list.push(this.pageIndex.items[i])
+      for (let i in items) {
+        items[i].name = items[i].name.split(startString).join('')
+        items[i].name = items[i].name.split(endString).join('')
+        console.log(items[i].name)
+        if (items[i].name.toUpperCase().search(this.searchMsg.toUpperCase()) != -1){
+          let split =items[i].name.toUpperCase().split(this.searchMsg.toUpperCase())
+
+          let newItem = split[0]
+          for (let i = 1; i < split.length; i++) {
+            newItem = newItem + startString + this.searchMsg.toUpperCase() + endString + split[i]
+          }
+          items[i].name = newItem
+          list.push(items[i])
         }
       }
       return list
