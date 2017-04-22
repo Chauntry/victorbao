@@ -41,13 +41,13 @@ export default {
 .absolute-center {
   position: absolute;
   top: 50%;
-  left: 85%;
+  left: 90%;
   transform: translateX(-50%) translateY(-50%);
 }
 .menu {
   @extend .absolute-center;
-  width: 3rem;
-  height: 3rem;
+  width: 70px;
+  height: 70px;
 
   .btn {
     position: absolute;
@@ -79,7 +79,7 @@ export default {
       .line {
         @extend .absolute-center;
         width: 60%;
-        height: 0.2rem;
+        height: 6px;
         background: #fff;
         border-radius: 0.2rem;
         transition: background-color 0.3s, height 0.3s, top 0.3s;
@@ -90,18 +90,18 @@ export default {
           position: absolute;
           left: 0;
           width: 100%;
-          height: 0.2rem;
+          height: 5px;
           background: #fff;
           border-radius: 0.2rem;
           transition: background-color 0.3s, transform 0.3s;
         }
         &:before {
-          top: -0.5rem;
+          top: -15px;
           transform-origin: 10% 100%;
         }
         &:after {
-          top: 0.5rem;
-          transform-origin: 20% 30%;
+          top: 15px;
+          transform-origin: 5% 10%;
         }
       }
     }

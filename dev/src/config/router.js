@@ -20,8 +20,22 @@ export function configRouter(router) {
     '/triple/display': {
       component: require('components/triple/display.vue')
     },
+    '/triple.mobile/jewelry': {
+      component: require('components/triple.mobile/jewelry.vue')
+    },
+
+    '/triple.mobile/jewelry/:id': {
+      name: 'jewelry',
+      component: require('components/triple.mobile/jewelryobj.vue')
+    },
+
     '/triple/jewelry': {
       component: require('components/triple/jewelry.vue')
+    },
+
+    '/triple/jewelry/:id': {
+      name: 'jewelry',
+      component: require('components/triple/jewelryobj.vue')
     },
     '/scrollthree': {
       component: require('components/triple/scrollthree.vue'),
@@ -44,10 +58,7 @@ export function configRouter(router) {
     // '/cpanel': {
     //   component: require('components/cpanel/index.vue'),
     // },
-    '/triple/jewelry/:id': {
-      name: 'jewelry',
-      component: require('components/triple/jewelryobj.vue')
-    },
+
     // '/bigprize/:id': {
     //   name: 'bigprize',
     //   component: require('components/bigprize/index.vue'),

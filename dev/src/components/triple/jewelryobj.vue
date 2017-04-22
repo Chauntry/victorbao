@@ -1,45 +1,56 @@
 <template lang="html">
-<div class= "app">
+
+<div class= "app" @click="notsearching">
+  <div class="menulist" :style="{'transform': fold ? 'translateX(-15rem)' : ''}">
+    <ul>
+      <li>homapage</li>
+      <li>contact</li>
+    </ul>
+  </div>
   <div id="ecrin-header">
-  <navtool></navtool>
+  <navtool :style="{visibility: !searching ? 'visible' : 'hidden'}"></navtool>
+  <div class="cntr" @click="searching = 2">
+    <div class="cntr-innr">
+      <label class="search">
+        <input id="inpt_search" type="text" v-model="searchMsg" @mouseover="searching = 1"  @mouseout="notsearching"></input>
+      </label>
+    </div>
+  </div>
    <a class="logo">Triple</a>
   </div>
 
   <div id="page" class="page">
-
-
-   <div class="content" id="dior-mobile">
-    <div id="ecrin-search" class="js-ecrin-search">
-     <a class="button-back" href="#/triple/jewelry">Back</a>
-
-     <div id="ecrin-search-form" class="search-form js-autocomplete-form">
-          <div class = "icon"> </div>
-      <input type="text" class="text autocomplete-input js-autocomplete-input" name="q" placeholder="Search..." autocomplete="off" v-model="searchMsg"/>
-      <ul class="autocomplete-list js-autocomplete-list"></ul>
-      <input type="submit" class="ok" value="OK" />
-     </div>
-    </div>
-
-   <div v-if= "!searchMsg" id="menuOverlay"></div>
-   <h3 v-if= "!searchMsg" v-html= "displayItem.name" > {{displayItem.name}} </h3>
+<!--    <h3 v-if= "!searchMsg" v-html= "displayItem.name" > {{displayItem.name}} </h3>
    <div v-if= "!searchMsg" id="scroll"><scroll v-if= "displayItem.photos" :photos= "displayItem.photos"></scroll>
 
     </div>
 
     <h1 v-if= "!searchMsg" v-html="displayItem.price" >
       {{displayItem.price == 'N/A' ? '' : displayItem.price}}
-    </h1>
+    </h1> -->
+  <scroll style= "display:none" v-if= "displayItem.photos" :photos= "displayItem.photos"></scroll>
+    <div v-if= "!searchMsg" :style = "{'height' : (clientHeight - 120) + 'px',
+                    'width' : (clientWidth - 40) + 'px',
+                    'margin' : '10px',
+                    'border' : '4px solid black',
+                    'text-align' : 'center',
+                    'line-height': (clientHeight - 120) + 'px',
+                    'font-size' : '100px'}">
+Ur Task
+    </div>
 
-    <div class="gamme-grid" :style="{searchMsg ? '' : {'margin-top': '3rem'}}">
+    <div class="gamme-grid" :style="searchMsg ? '' : {'margin-top': '100px'}">
       <h3 v-if= "!searchMsg" > <span>SUGGESTIONS</span> </h3>
 
       <ul data-category="Rose_des_vents" class="js-category">
         <li v-if= "!searchMsg" v-for="id in pageIndex.suggestion">
           <a href="#/triple/jewelry/{{id}}" class="packshot" @click = "reload(id)" >
+          <div class="dsimg" >
           <img :src="findDisplayItem(id).photos[0]" alt="" /></a>
+          </div>
           <div>
            <a  href="#/triple/jewelry/{{id}}" @click = "reload(id)">
-             <h4> {{findDisplayItem(id).name}} </h4>
+             <h1> {{findDisplayItem(id).name}} </h4>
              <p></p>
              <span class="price" v-html="findDisplayItem(id).price">
                {{findDisplayItem(id).price}}
@@ -49,10 +60,12 @@
         </li>
         <li v-if= "searchMsg" v-for="item in searchItems">
           <a @click = "reload(item.id)" href="#/triple/jewelry/{{item.id}}" class="packshot">
+          <div class="dsimg" >
           <img :src="item.photos[0]"/></a>
+          </div>
           <div>
            <a @click = "reload(item.id)" href="#/triple/jewelry/{{item.id}}">
-             <h4> {{item.name}} </h4>
+             <h1> {{item.name}} </h4>
              <p></p>
              <span class="price" v-html= "item.price">{{item.price}}</span>
            </a>
@@ -65,21 +78,21 @@
     <div id="ecrin-footer" data-role="footer" class="ecrin-global ecrin-white-footer">
 
      <div id="ecrin-footer-wrapper" class="border-top">
-       <a href="#/triple/jewelry/1" class="ecrin-footer-buttons">Contact</a>
+       <a href="#/triple/jewelry" class="ecrin-footer-buttons">Contact</a>
      </div>
 
 
      <div id="ecrin-footer-links">
       <nav>
        <ul>
-        <li> <a href="#/triple/jewelry/1">Boutiques</a></li>
-        <li> <a href="#/triple/jewelry/1">Contact</a></li>
-        <li><a href="#/triple/jewelry/1">My Account</a></li>
+        <li> <a href="#/triple/jewelry">Boutiques</a></li>
+        <li> <a href="#/triple/jewelry">Contact</a></li>
+        <li><a href="#/triple/jewelry">My Account</a></li>
        </ul>
        <ul>
-        <li> <a href="#/triple/jewelry/1">Legal Terms</a></li>
-        <li> <a href="#/triple/jewelry/1">Personal Data</a></li>
-        <li> <a href="#/triple/jewelry/1">CAREERS</a></li>
+        <li> <a href="#/triple/jewelry">Legal Terms</a></li>
+        <li> <a href="#/triple/jewelry">Personal Data</a></li>
+        <li> <a href="#/triple/jewelry">CAREERS</a></li>
        </ul>
       </nav>
      </div>
@@ -96,7 +109,7 @@
 <script>
 import * as actions from 'vuex/actions'
 import $ from 'jquery'
-import navtool from 'components/global/navtool.vue'
+import navtool from 'components/global/navtool_px.vue'
 import eye from 'components/triple/goods/eye.vue'
 import scroll from 'components/triple/scrollthree.vue'
 import scrollnav from 'components/global/scrollnav.vue'
@@ -115,10 +128,11 @@ export default {
   },
   data() {
     return {
+      searching : 0,
       searchMsg: '',
       pageIndex: {},
       displayItem: {},
-      fold : true,
+      fold : false,
       predisplayControl: {
         eye : 0,
         other : 0
@@ -146,8 +160,12 @@ export default {
       }
       return {}
     },
+    notsearching () {
+      if ($(".search").hasClass('active'))
+        return
+      this.searching = 0
+    },
     reload(id) {
-      console.log(111)
       this.searchMsg = ''
       this.displayItem = {}
       setTimeout(()=> {this.displayItem = this.findDisplayItem(id)},10)
@@ -201,7 +219,7 @@ export default {
     this.marilynHeight = this.clientHeight * 0.6
     this.eyeHeight = this.clientHeight * 0.6
     this.eyecolor = this.$route.query.eyecolor ? this.$route.query.eyecolor : this.eyecolor
-    $(".trigger").click(function() {
+    $(".trigger").click(() => {
       $(".menu").toggleClass("active");
       this.fold = this.fold ? false : true
     });
@@ -220,17 +238,17 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+
 .app {
   position: relative;
   background-color: white;
   font-family: "Century Gothic","Futura",sans-serif;
-
+  box-shadow: 1rem 0rem 1rem #112541;
+    transition: transform 1s;
 }
 h3 {
   font-weight: normal;
-  text-align: center;
-  text-transform: uppercase;
 }
 h4 {
   font-weight: normal;
@@ -257,6 +275,16 @@ h2 {
 
 }
 
+.menulist{
+  position: absolute;
+  transform: translateX(110%);
+  height: 100%;
+  color: white;
+  width: 100%;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
 #ecrin-header {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -265,7 +293,7 @@ h2 {
     top: 0;
     z-index: 6;
     width: 100%;
-    height: 3.8rem;
+    height: 100px;
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
     background: #000000;
     -webkit-backface-visibility: hidden;
@@ -278,18 +306,11 @@ h2 {
 
 #ecrin-header a{
   color: white;
-  font-size: 2.3rem;
-  line-height: 3.7rem;
-  margin-left: 4%;
+  font-size: 70px;
+  line-height: 90px;
+  margin-left: 0%;
 }
 
-#ecrin-header.hidden {
-    -moz-transform: translate(0, -65px);
-    -ms-transform: translate(0, -65px);
-    -webkit-transform: translate(0, -65px);
-    transform: translate(0, -65px);
-    -webkit-backface-visibility: hidden
-}
 
 #page {
     width: 100%;
@@ -303,7 +324,7 @@ h2 {
     -o-transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
-    padding-top: 65px
+    padding-top: 100px
 }
 #menuOverlay {
     top: 0;
@@ -319,105 +340,6 @@ h2 {
     -o-transition: opacity 0.5s ease-in;
     -webkit-transition: opacity 0.5s ease-in;
     transition: opacity 0.5s ease-in
-}
-
-
-#scroll {
-  margin-top: 1rem;
-  margin-bottom: 18rem;
-    width: 100%;
-    height: 6rem;
-    position: relative;
-}
-#ecrin-search {
-    position: relative;
-    display: block;
-    z-index: 1;
-    width: 100%;
-    background: #fff;
-    padding: 7px;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    -moz-transition: top,0.5s,ease-in-out;
-    -o-transition: top,0.5s,ease-in-out;
-    -webkit-transition: top,0.5s,ease-in-out;
-    transition: top,0.5s,ease-in-out
-}
-#ecrin-search .icon{
-    height: 35px;
-    width: 35px;
-    position: absolute;
-
-    display: block;
-    background-image: url('~assets/search.png');
-    background-size: 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-#ecrin-search .search-form {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 35px
-}
-
-
-#ecrin-search input[type='text'],#ecrin-search .button-back {
-    height: 100%;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 1px solid #8e8e8e;
-    font-size: 13px;
-    font-family: "Century Gothic","Futura",sans-serif;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #8e8e8e;
-    cursor: pointer
-}
-
-#ecrin-search input[type=text] {
-    width: 100%;
-    outline: 0;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding-left: 40px
-}
-
-#ecrin-search input::-webkit-input-placeholder {
-    color: #8e8e8e
-}
-
-#ecrin-search input[type="submit"] {
-    visibility: hidden;
-    height: 0;
-    width: 0
-}
-
-#ecrin-search .button-back {
-    position: absolute;
-    left: 7px;
-    top: 7px;
-    width: 90px;
-    height: 35px;
-    line-height: 35px;
-    vertical-align: middle;
-    text-align: center;
-    z-index: 2
-}
-
-#ecrin-search .button-back+.search-form {
-    width: 100%;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding-left: 100px
-}
-
-#ecrin-search .button-back+.search-form:before {
-    left: 110px
 }
 
 .page-home-news {
@@ -449,294 +371,77 @@ h1 {
 
 .gamme-grid {
   clear: both;
-  color: #8e8e8e;
-  font-family: "Century Gothic","Futura",sans-serif
-}
-
-.gamme-grid a {
-  color: #8e8e8e;
-  font-family: "Century Gothic","Futura",sans-serif
+  width: 80%;
+  min-width: 800px;
+  position: relative;
+  padding-bottom: 100px;
+  margin: 0 auto;
 }
 
 .gamme-grid h3 {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
+  text-align: center;
+  border-bottom: 1px solid #cccccc;
+  letter-spacing: -0.02em;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   width: 100%;
-  padding: 17.5px 5%;
-  display: table;
   text-transform: uppercase;
-  border-bottom: 1px solid #e6e6e6;
-  font-size: 15px;
+
+  font-size: 40px;
   color: #000;
-  -webkit-transition: 0.4s opacity ease-in-out;
-  -moz-transition: 0.4s opacity ease-in-out;
-  -ms-transition: 0.4s opacity ease-in-out;
-  -o-transition: 0.4s opacity ease-in-out;
-  transition: 0.4s opacity ease-in-out
+  transition: 0.4s opacity ease-in-out;
+  padding-bottom: 4px;
 }
 
-.gamme-grid h3 > span {
-  display: table-cell;
-  vertical-align: middle
-}
 
-.gamme-grid h3 > span span {
-  display: block;
-  color: #8e8e8e;
-  text-transform: none;
-  margin-top: 8px;
-  font-size: 10px
-}
-
-.gamme-grid h3.hidden {
-  display: none;
-  opacity: 0
-}
-
-.gamme-grid p {
-  text-transform: uppercase;
-  line-height: 16px
-}
-
-.gamme-grid .logo {
-  margin-top: 20px;
-  max-width: 90%
-}
 
 .gamme-grid ul {
-  overflow: hidden;
-  font-family: "Century Gothic","Futura",sans-serif
-}
-
-.gamme-grid > ul > li,.gamme-grid > ul > .more-zone > li {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  position: relative;
-  width: 100%;
-  padding: 30px 5% 0;
-  display: table;
-  overflow: hidden;
-  font-size: 13px;
-  visibility: visible;
-  opacity: 1;
-  -webkit-transition: 0.6s opacity ease-in-out;
-  -moz-transition: 0.6s opacity ease-in-out;
-  -ms-transition: 0.6s opacity ease-in-out;
-  -o-transition: 0.6s opacity ease-in-out;
-  transition: 0.6s opacity ease-in-out
-}
-
-.gamme-grid > ul > li:not(:last-of-type),.gamme-grid > ul > .more-zone > li:not(:last-of-type) {
-  border-bottom: 1px solid #e6e6e6
-}
-
-.gamme-grid > ul > li div,.gamme-grid > ul > .more-zone > li div {
-  width: 60%;
-  display: table-cell;
-  vertical-align: middle;
-  overflow: hidden
-}
-
-.gamme-grid > ul > li a.packshot,.gamme-grid > ul > .more-zone > li a.packshot {
-  width: 40%;
-  display: table-cell;
-  vertical-align: middle;
-  overflow: hidden;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding-right: 5%
-}
-
-.gamme-grid > ul > li a.packshot img,.gamme-grid > ul > .more-zone > li a.packshot img {
-  display: block;
-  width: 100%;
-  min-width: 100%;
-  margin-bottom: 30px
-}
-
-.gamme-grid > ul > li span,.gamme-grid > ul > .more-zone > li span {
-  display: block;
-  margin-top: 15px
-}
-
-.gamme-grid > ul > li h4,.gamme-grid > ul > .more-zone > li h4 {
-  margin-bottom: 5px;
-  line-height: 18px;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #000
-}
-
-.gamme-grid > ul > li h4 span,.gamme-grid > ul > .more-zone > li h4 span {
-  display: block
-}
-
-.gamme-grid > ul > .more-zone {
-  display: none
-}
-
-.gamme-grid > ul > .more-zone > li:first-of-type {
-  border-top: 1px solid #e6e6e6
-}
-
-.gamme-grid .generic-more {
-  margin-top: 15px;
-  position: relative;
-  left: 50%;
-  -webkit-transform: translate(-50%,0);
-  -moz-transform: translate(-50%,0);
-  -ms-transform: translate(-50%,0);
-  -o-transform: translate(-50%,0);
-  transform: translate(-50%,0)
-}
-
-.gamme-grid .covering {
-  font-family: "Century Gothic","Futura",sans-serif
-}
-
-.gamme-grid .covering b {
-  width: 8px;
-  height: 8px;
-  display: inline-block;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  background: #cecece
-}
-
-.gamme-grid .covering b:after {
-  content: "";
-  display: block;
-  width: 8px;
-  height: 8px;
-  -webkit-border-radius: 8px 8px 8px 8px;
-  -moz-border-radius: 8px 8px 8px 8px;
-  border-radius: 8px 8px 8px 8px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  background: #363739
-}
-
-.gamme-grid .covering b.half:after {
-  width: 4px;
-  -webkit-border-radius: 8px 0 0 8px;
-  -moz-border-radius: 8px 0 0 8px;
-  border-radius: 8px 0 0 8px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box
-}
-
-.gamme-grid .covering b.empty:after {
-  display: none
-}
-
-.gamme-grid .shade-list {
-  width: 155px;
   margin-top: 20px;
-  margin-bottom: -2px
 }
 
-.gamme-grid .shade-list li {
-  width: 27px;
-  height: auto;
-  margin: 2px;
-  padding: 0;
-  display: block;
+.gamme-grid ul li {
+  border: 1px solid #e5e5e5;
+  min-width: 200px;
+  height: 500px;
+  position: relative;
+  width: 30%;
   float: left;
-  border: 0
-}
-
-.gamme-grid .shade-list img {
-  display: block;
-  width: 100%;
-  height: auto
-}
-
-.gamme-grid .cta {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 151px;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 2px;
-  display: block;
-  float: left;
-  line-height: 13px;
-  text-transform: none;
   text-align: center;
-  font-size: 11px;
-  color: #8e8e8e;
-  border: 1px solid #e6e6e6
+  color: #040a2b;
+  margin-bottom: 50px;
+  .dsimg {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    transform: translateY(50%);
+    img {
+      transform: translateY(-50%);
+      position: relative;
+      width: 100%;
+    }
+  }
 }
+
+.gamme-grid ul li:nth-child(3n+1) {
+  margin-right: 5%;
+}
+.gamme-grid ul li:nth-child(3n+2) {
+}
+.gamme-grid ul li:nth-child(3n) {
+  margin-left: 5%;
+}
+
 
 .gamme-grid .price {
-  float: left;
+  font-size: 20px;
   clear: left;
   color: #000;
   margin-bottom: 30px;
   margin-top: 20px;
   font-family: "Century Gothic","Futura",sans-serif
 }
-
-.gamme-grid .unavailable {
-  clear: left;
-  float: left;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  font-size: 10px;
-  font-family: "Century Gothic","Futura",sans-serif
-}
-
-.gamme-grid ul.tag-list {
-  position: relative;
-  display: block;
-  clear: both;
-  font-family: "Century Gothic","Futura",sans-serif
-}
-
-.gamme-grid ul.tag-list li {
-  padding: 0 10px;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-  font-size: 11px;
-  line-height: 11px
-}
-
-.gamme-grid ul.tag-list li.exclu {
-  color: #c29b6d
-}
-
-.gamme-grid ul.tag-list li:before {
-  content: "#";
-  display: block;
-  position: absolute;
-  left: 0
-}
-
-.gamme-grid.has-filters > ul > li {
-  display: none
-}
-
-.gamme-grid.has-filters.show-exclu > ul > li.exclu {
-  display: block;
-  opacity: 1
-}
-
-.gamme-grid.has-filters.show-new > ul > li.new {
-  display: block;
-  opacity: 1
-}
-
 
 #ecrin-footer-wrapper {
     width: 100%;
@@ -753,8 +458,8 @@ h1 {
     padding-top: 20px;
     padding-bottom: 20px;
     display: block;
-    width: 48%;
-    margin-left: 20%;
+    width: 50%;
+    margin-left: 25%;
     margin-bottom: 2rem;
     font-size: 15px;
 
@@ -798,4 +503,67 @@ h1 {
     text-transform: uppercase;
 }
 
+.cntr {
+  z-index: 10005;
+  display: table;
+  position: fixed;
+  top: 0;
+  right: 10%;
+  width: 100px;
+  height: 100px;
+  .cntr-innr {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    .search {
+      color: white;
+      display: inline-block;
+      position: relative;
+      height: 35px;
+      width: 35px;
+      box-sizing: border-box;
+      margin: 0px 8px 7px 0px;
+      padding: 7px 9px 0px 9px;
+      border: 5px solid #fff;
+      border-radius: 25px;
+      transition: all 200ms ease;
+      cursor: text;
+      &:after {
+        content: "";
+        position: absolute;
+        width: 5px;
+        height: 20px;
+        right: -5px;
+        top: 21px;
+        background: #fff;
+        border-radius: 3px;
+        transform: rotate(-45deg);
+        transition: all 200ms ease;
+      }
+      &.active,
+      &:hover {
+        height: 50px;
+        width: 500px;
+        transform: translateX(-300px);
+        &:after {
+          height: 0px;
+        }
+      }
+      input {
+        text-align: center;
+        transform: translateY(-10px);
+        height: 50px;
+        color: white;
+        width: 100%;
+        border: none;
+        box-sizing: border-box;
+        font-family: Helvetica;
+        font-size: 30px;
+        color: inherit;
+        background: transparent;
+        outline-width: 0px;
+      }
+    }
+  }
+}
 </style>
