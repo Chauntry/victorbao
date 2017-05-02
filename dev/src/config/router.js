@@ -11,6 +11,10 @@ export function configRouter(router) {
       component: require('components/triple/index.vue')
     },
 
+    '/triple/rose': {
+      component: require('components/triple/index_rose.vue')
+    },
+
     '/triple/eye': {
       component: require('components/triple/eye-marilyn.vue')
     },
