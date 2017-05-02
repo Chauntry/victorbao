@@ -3,14 +3,14 @@
     "suggestion": [1, 3, 4],
     "recom": [{
         "id": 1,
-        "name": "stud blablablablabla",
+        "name": "stud",
         "descr": "describe of stud ...",
         "photos": [
             "http://www.victorbao.co.uk/data/0_recom/1.jpg"
         ]
     }, {
         "id": 6,
-        "name": "glove blablablablabla",
+        "name": "glove",
         "descr": "describe of glove ...",
         "photos": [
             "http://www.victorbao.co.uk/data/0_recom/2.png"
@@ -18,8 +18,9 @@
     }],
     "items": [{
         "id": 1,
-        "name": "stud blablablablabla",
+        "name": "stud",
         "price": "£2 650.00",
+        "descr": "",
         "photos": [
             "http://www.victorbao.co.uk/data/1_stud/1.jpg",
             "http://www.victorbao.co.uk/data/1_stud/2.jpg",
@@ -33,8 +34,9 @@
         ]
     }, {
         "id": 2,
-        "name": "spoon blablablablabla",
+        "name": "spoon",
         "price": "N/A",
+        "descr": "",
         "photos": [
             "http://www.victorbao.co.uk/data/2_spoon/1.png",
             "http://www.victorbao.co.uk/data/2_spoon/2.png",
@@ -45,8 +47,9 @@
         ]
     }, {
         "id": 3,
-        "name": "limit blablablablabla",
+        "name": "limit",
         "price": "£250.00",
+        "descr": "",
         "photos": [
             "http://www.victorbao.co.uk/data/3_limit/1.png",
             "http://www.victorbao.co.uk/data/3_limit/2.png",
@@ -55,8 +58,9 @@
         ]
     }, {
         "id": 4,
-        "name": "ring blablablablabla",
+        "name": "ring",
         "price": "N/A",
+        "descr": "",
         "photos": [
             "http://www.victorbao.co.uk/data/4_ring/1.png",
             "http://www.victorbao.co.uk/data/4_ring/2.png",
@@ -64,8 +68,9 @@
         ]
     }, {
         "id": 5,
-        "name": "vessle blablablablabla",
+        "name": "vessle",
         "price": "£2 650.00",
+        "descr": "",
         "photos": [
             "http://www.victorbao.co.uk/data/5_vessle/1.png",
             "http://www.victorbao.co.uk/data/5_vessle/2.png",
@@ -73,8 +78,9 @@
         ]
     }, {
         "id": 6,
-        "name": "glove blablablablabla",
+        "name": "glove",
         "price": "N/A",
+        "descr": "",
         "photos": [
             "http://www.victorbao.co.uk/data/6_glove/1.png",
             "http://www.victorbao.co.uk/data/6_glove/2.png",
