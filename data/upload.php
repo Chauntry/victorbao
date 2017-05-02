@@ -19,9 +19,9 @@ if(!is_uploaded_file($file['tmp_name'])){
 $upload_path = "./";
 
 if(move_uploaded_file($file['tmp_name'],$upload_path.$file['name'])){
-  echo "Successfully!";
+  echo "1";
 }else{
-  echo "Failed!";
+  echo "0";
 }
 
 ?>

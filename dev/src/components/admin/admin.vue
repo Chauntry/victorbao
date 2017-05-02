@@ -1,6 +1,8 @@
 <template lang="jade">
 .app
-  .wrap
+  .lock(v-if = "key != 'admin'") key:
+    input(v-model = "key",length = "200px")
+  .wrap(v-if = "key == 'admin'")
     center.center
       button(@click = "addNewItem") Add New Item
       button(@click = "update(json)") Submit
@@ -13,7 +15,7 @@
         div
           input.file(id="file",type="file",accept="image/*")
         div
-          button(@click="upload") Add Photo
+          button(@click="upload($index)") Add Photo
           button(@click="remove($index)") Remove
         .index
           button(v-if= "$index != json.items.length -1", @click = "moveDown($index)") moveDown
@@ -44,6 +46,7 @@ export default {
   },
   data() {
     return {
+      key: '',
       index: 0,
       json: {},
     }
@@ -99,12 +102,15 @@ export default {
     remove(index) {
       this.json.items.$remove(this.json.items[index])
     },
-    upload() {
+    upload(index) {
       var formData = new FormData()
-      let upload_file = $('#file')[0].files[0]
-      console.log(upload_file.name)
+      let upload_file = $('#file')[index].files[0]
+      let name = upload_file.name
+      // name = './' + index + '#' + (this.json.items[index].photos.length+1) + '.' + name
+      // upload_file.name = name
       formData.append('file', upload_file)
-
+      let link = 'http://www.victorbao.co.uk/data/' + upload_file.name
+      console.log(link)
       $.ajax({
           url: 'http://www.victorbao.co.uk/data/upload.php',
           type: 'POST',
@@ -112,13 +118,17 @@ export default {
           data: formData,
           processData: false,
           contentType: false
-      }).done(function(res) {
+      }).done((res) => {
         if (res != 1) {
           alert(res)
         }
-      }).fail(function(res) {
+        this.addPhoto(link,index)
+      }).fail((res) => {
         alert(res)
       });
+    },
+    addPhoto(link, index) {
+      this.json.items[index].photos.unshift(link)
     }
   },
   computed: {
@@ -158,7 +168,6 @@ export default {
   background-color: #555555
   border: 2px solid #555555
 .app
-  height: 100%
   width: 100%
   color: white
   .wrap
@@ -223,6 +232,17 @@ export default {
       margin-right: 100px
       margin-left: 100px
       margin-bottom: 50px
+  .lock
+
+    height: 100px
+    margin-left: 20%
+    margin-top: 20%
+    font-size: 50px
+    input
+      font-size: 50px
+      color: white
+      background-color: #1b384b
+      border: 0px solid
 button
   margin-right: 9px
   text-align: center

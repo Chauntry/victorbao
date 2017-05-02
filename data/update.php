@@ -6,7 +6,7 @@ error_reporting(E_ALL | E_STRICT);
 
 $json = $_POST['json'];
 
-$info = file_put_contents('test.json', $json);
+$info = file_put_contents('data.json', $json);
 
 
 echo $info;
