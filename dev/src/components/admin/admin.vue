@@ -101,7 +101,9 @@ export default {
     },
     upload() {
       var formData = new FormData()
-      formData.append('file', $('#file')[0].files[0])
+      let upload_file = $('#file')[0].files[0]
+      console.log(upload_file.name)
+      formData.append('file', upload_file)
 
       $.ajax({
           url: 'http://www.victorbao.co.uk/data/upload.php',
@@ -111,7 +113,12 @@ export default {
           processData: false,
           contentType: false
       }).done(function(res) {
-      }).fail(function(res) {});
+        if (res != 1) {
+          alert(res)
+        }
+      }).fail(function(res) {
+        alert(res)
+      });
     }
   },
   computed: {
