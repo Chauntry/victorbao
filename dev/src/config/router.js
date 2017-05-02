@@ -57,7 +57,9 @@ export function configRouter(router) {
       component: require('components/register/index.vue'),
     },
 
-
+    '/admin': {
+      component: require('components/admin/admin.vue')
+    },
 
     // '/cpanel': {
     //   component: require('components/cpanel/index.vue'),
