@@ -38,7 +38,7 @@ export default {
       styleFormid: '',
       styleForleft: '',
       adjust: [false,false,false],
-      trasnitionControl: 'transform 1s',
+      trasnitionControl: 'transform 0.5s',
       rcmd: [],
       currentime: 0,
       movingDistance: 0,
@@ -112,7 +112,7 @@ export default {
         this.adjustDegPrev ()
         // setTimeouthere is give time for adjust rotataY
         setTimeout(() => {
-          this.trasnitionControl = 'transform 1s'
+          this.trasnitionControl = 'transform 0.3s'
           this.indexOf3 --
           if (this.indexOf3 < 0) this.indexOf3 = 2
           this.countTransform(0)
@@ -127,7 +127,7 @@ export default {
         this.moving = true
         this.adjustDegNext ()
         setTimeout(() => {
-          this.trasnitionControl = 'transform 1s'
+          this.trasnitionControl = 'transform 0.3s'
           this.indexOf3 ++
           if (this.indexOf3 > 2) this.indexOf3 = 0
           this.countTransform(0)
@@ -150,9 +150,7 @@ export default {
     },
     // ...
     modify () {
-      // 修改数据
       this.styleForright = 'changed'
-      // DOM 还没有更新
       this.$nextTick( this.moveNext ())
     },
 
@@ -181,20 +179,18 @@ export default {
 
 
       // There is a bug for the speed moving
-      // if(this.speed > 0.5){
-      //   if (this.touching){
-      //     self = this
-      //     setTimeout(function() {self.moveNext()},100)
-      //   }
-      //   this.touching = false
-      // }
-      // if(this.speed < -0.5){
-      //   if (this.touching){
-      //     self = this
-      //     setTimeout(function() {self.movePrev()},100)
-      //   }
-      //   this.touching = false
-      // }
+      if(this.speed > 0.6){
+        if (this.touching){
+          setTimeout(() => {this.moveNext()},100)
+        }
+        this.touching = false
+      }
+      if(this.speed < -0.6){
+        if (this.touching){
+          setTimeout(() => {this.movePrev()},100)
+        }
+        this.touching = false
+      }
 
       // Let scroll move when speed up
       // while using below code, there is a unfixed bug
@@ -214,7 +210,7 @@ export default {
         this.touching = false
         if (!this.moving){
 
-          this.trasnitionControl = 'transform 1s'
+          this.trasnitionControl = 'transform 0.3s'
           this.countTransform(0)
         }
       }
@@ -398,7 +394,7 @@ export default {
         position: absolute
         left: r(0)
         top: r(0)
-        transition: transform 1s
+        transition: transform 0.5s
         width: r(600)
         height: r(600)
         background: #fff

@@ -248,7 +248,7 @@ export default {
   background-color: white;
   font-family: "Century Gothic","Futura",sans-serif;
   box-shadow: 1rem 0rem 1rem #112541;
-    transition: transform 1s;
+  transition: transform 1s;
 }
 
 .menulist{

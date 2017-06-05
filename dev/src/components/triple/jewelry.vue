@@ -1,5 +1,4 @@
 <template lang="html">
-
 <div class= "app" @click="notsearching">
   <div class="menulist" :style="{'transform': fold ? 'translateX(-15rem)' : ''}">
     <ul>
@@ -8,85 +7,67 @@
     </ul>
   </div>
   <div id="ecrin-header">
-  <navtool :style="{visibility: !searching ? 'visible' : 'hidden'}"></navtool>
-  <div class="cntr" @click="searching = 2">
-    <div class="cntr-innr">
-      <label class="search">
+    <navtool :style="{visibility: !searching ? 'visible' : 'hidden'}"></navtool>
+    <div class="cntr" @click="searching = 2">
+      <div class="cntr-innr">
+        <label class="search">
         <input id="inpt_search" type="text" v-model="searchMsg" @mouseover="searching = 1"  @mouseout="notsearching"></input>
-      </label>
-    </div>
-  </div>
-   <a class="logo">Triple</a>
-  </div>
-
-  <div id="page" class="page">
-   <div id="menuOverlay"></div>
-
-   <div class="content" id="dior-mobile">
-
-
-    <div v-if= "!searchMsg" id="wrapper" class="page-home-news" data-page="home-news" data-track-univers="CDC" data-track-page="PDG">
-      <div class="padded-content border-bottom">
-        <h1 class="title centered">
-        <!-- START New Campaigns -->
-<!--         <a v-for="item in recom" class="new-campaign" href="#/triple/jewelry/{{item.id}}">
-          <img :src="item.photos[0]"/>
-        </a> -->
-        <a class="new-campaign" href="#/triple/jewelry/{{recom[0].id}}">
-          <img :src="recom[0].photos[0]"/>
-        </a>
+        </label>
       </div>
     </div>
-
-
-    <div class="gamme-grid" :style="!searchMsg ? '' : {'margin-top': '100px'}">
-      <h3 class="grid_header" v-if= "!searchMsg" > <span>THE COLLECTION</span> </h3>
-      <ul data-category="Rose_des_vents" class="js-category">
-        <li v-for="item in searchItems">
-          <a href="#/triple/jewelry/{{item.id}}" class="packshot">
-          <div class="dsimg" ><img :src="item.photos[0]"/></img> </div>
-          <div>
-           <a href="#/triple/jewelry/{{item.id}}">
-             <h1 v-html= "item.name"> {{item.name}} </h1>
-             <p></p>
-             <span class="price" v-html= "item.price">{{item.price}}</span>
-           </a>
-          </div>
-        </li>
-
-      </ul>
+    <a class="logo">Triple</a>
+  </div>
+  <div id="page" class="page">
+    <div id="menuOverlay"></div>
+    <div class="content" id="dior-mobile">
+      <div v-if= "!searchMsg" id="wrapper" class="page-home-news" data-page="home-news" data-track-univers="CDC" data-track-page="PDG">
+        <div class="padded-content border-bottom">
+          <h1 class="title centered">
+          <a v-if = "recom[0]" class="new-campaign" href="#/index/{{recom[0].id}}">
+          <img :src="recom[0].photos[0]"/>
+          </a>
+        </div>
+      </div>
+      <div class="gamme-grid" :style="!searchMsg ? '' : {'margin-top': '100px'}">
+        <h3 class="grid_header" v-if= "!searchMsg" > <span>THE COLLECTION</span> </h3>
+        <ul data-category="Rose_des_vents" class="js-category">
+          <li v-for="item in searchItems">
+            <a href="#/index/{{item.id}}" class="packshot">
+              <div class="dsimg" ><img :src="item.photos[0]"/></img> </div>
+              <div>
+            <a href="#/index/{{item.id}}">
+            <h1 v-html= "item.name"> {{item.name}} </h1>
+            <p></p>
+            <span class="price" v-html= "item.price">{{item.price}}</span>
+            </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div id="ecrin-footer" data-role="footer" class="ecrin-global ecrin-white-footer">
+        <div id="ecrin-footer-wrapper" class="border-top">
+          <a href="#/index" class="ecrin-footer-buttons">Contact</a>
+        </div>
+        <div id="ecrin-footer-links">
+          <nav>
+            <ul>
+              <li> <a href="#/index">Boutiques</a></li>
+              <li> <a href="#/index">Contact</a></li>
+              <li><a href="#/index">My Account</a></li>
+            </ul>
+            <ul>
+              <li> <a href="#/index">Legal Terms</a></li>
+              <li> <a href="#/index">Personal Data</a></li>
+              <li> <a href="#/index">CAREERS</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- END FOOTER -->
     </div>
-
-
-
-    <div id="ecrin-footer" data-role="footer" class="ecrin-global ecrin-white-footer">
-
-     <div id="ecrin-footer-wrapper" class="border-top">
-       <a href="#/triple/jewelry" class="ecrin-footer-buttons">Contact</a>
-     </div>
-
-
-     <div id="ecrin-footer-links">
-      <nav>
-       <ul>
-        <li> <a href="#/triple/jewelry">Boutiques</a></li>
-        <li> <a href="#/triple/jewelry">Contact</a></li>
-        <li><a href="#/triple/jewelry">My Account</a></li>
-       </ul>
-       <ul>
-        <li> <a href="#/triple/jewelry">Legal Terms</a></li>
-        <li> <a href="#/triple/jewelry">Personal Data</a></li>
-        <li> <a href="#/triple/jewelry">CAREERS</a></li>
-       </ul>
-      </nav>
-     </div>
-    </div>
-    <!-- END FOOTER -->
-   </div>
-   <!-- END CONTENT -->
+    <!-- END CONTENT -->
   </div>
 </div>
-
 
 </template>
 
@@ -183,7 +164,7 @@ export default {
   },
   ready () {
     if (!this.IsPC()) {
-      this.$router.go("/triple.mobile/jewelry")
+      this.$router.go("/index.mobile")
     }
 
   var p=0,t=0;
