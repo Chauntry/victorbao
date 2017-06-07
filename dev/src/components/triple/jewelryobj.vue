@@ -20,14 +20,7 @@
   </div>
 
   <div id="page" class="page">
-<!--    <h3 v-if= "!searchMsg" v-html= "displayItem.name" > {{displayItem.name}} </h3>
-   <div v-if= "!searchMsg" id="scroll"><scroll v-if= "displayItem.photos" :photos= "displayItem.photos"></scroll>
 
-    </div>
-
-    <h1 v-if= "!searchMsg" v-html="displayItem.price" >
-      {{displayItem.price == 'N/A' ? '' : displayItem.price}}
-    </h1> -->
   <scroll style= "display:none" v-if= "displayItem.photos" :photos= "displayItem.photos"></scroll>
     <div v-if= "!searchMsg" :style = "{'height' : (clientHeight - 120) + 'px',
                     'width' : (clientWidth - 40) + 'px',

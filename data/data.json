@@ -1,6 +1,7 @@
 {
     "version": "1.1",
     "suggestion": [1, 3, 4],
+    "catalogs" : ["earring", "rings", "others"],
     "recom": [{
         "id": 1,
         "name": "stud",
@@ -18,6 +19,7 @@
     }],
     "items": [{
         "id": 1,
+        "catalog": "earring",
         "name": "stud",
         "price": "£2 650.00",
         "descr": "",
@@ -34,6 +36,7 @@
         ]
     }, {
         "id": 2,
+        "catalog": "others",
         "name": "spoon",
         "price": "N/A",
         "descr": "",
@@ -47,6 +50,7 @@
         ]
     }, {
         "id": 3,
+        "catalog": "others",
         "name": "limit",
         "price": "£250.00",
         "descr": "",
@@ -58,6 +62,7 @@
         ]
     }, {
         "id": 4,
+        "catalog": "rings",
         "name": "ring",
         "price": "N/A",
         "descr": "",
@@ -68,6 +73,7 @@
         ]
     }, {
         "id": 5,
+        "catalog": "others",
         "name": "vessle",
         "price": "£2 650.00",
         "descr": "",
@@ -78,6 +84,7 @@
         ]
     }, {
         "id": 6,
+        "catalog": "others",
         "name": "glove",
         "price": "N/A",
         "descr": "",

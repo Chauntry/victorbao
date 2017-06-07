@@ -1,30 +1,20 @@
 export function configRouter(router) {
   router.map({
     '/': {
-      component: require('components/triple/index.vue')
+      component: require('components/home/homepage.vue')
     },
-    // '/cookiesindex': {
-    //   component: require('components/cookiesindex/index.vue')
+    // '/triple/eye': {
+    //   component: require('components/triple/eye-marilyn.vue')
     // },
-
-
-
-    // '/triple/rose': {
-    //   component: require('components/triple/index_rose.vue')
+    // '/triple/eye-animation': {
+    //   component: require('components/triple/eye-animation.vue')
     // },
-
-    '/triple/eye': {
-      component: require('components/triple/eye-marilyn.vue')
-    },
-    '/triple/eye-animation': {
-      component: require('components/triple/eye-animation.vue')
-    },
-    '/triple/display': {
-      component: require('components/triple/display.vue')
-    },
-    // '/triple.mobile/jewelry': {
-    //   component: require('components/triple.mobile/jewelry.vue')
+    // '/triple/display': {
+    //   component: require('components/triple/display.vue')
     // },
+    '/catalog': {
+      component: require('components/triple/catalog.vue')
+    },
 
     '/index.mobile': {
       component: require('components/triple.mobile/jewelry.vue')
@@ -46,7 +36,6 @@ export function configRouter(router) {
     '/scrollthree': {
       component: require('components/triple/scrollthree.vue'),
     },
-
 
     '/admin': {
       component: require('components/admin/admin.vue')
