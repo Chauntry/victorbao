@@ -9,22 +9,18 @@
     a.logo(@click = "$router.go('/')") Triple
     ul.catalog
       li.dir
-        a.text(@click = "$router.go('/catalog')") home
+        a.text(@click = "$router.go('/catalog')")#current home
       li.dir(v-for="cat in catalogs")
-        a.text(v-if = "cat == currentcatalog", @click = "changeCatalogs(cat)",id= "current") {{cat}}
-        a.text(v-if = "cat != currentcatalog", @click = "changeCatalogs(cat)") {{cat}}
-  .hero(v-if= "recom[0]", :style = "{'background-image' : 'url(' + heroPhoto + ')', height: clientHeight - 1 + 'px'}")
+        a.text(@click = "$router.go('/catalog/' + cat)") {{cat}}
+  .hero(v-if= "recom[0]", :style = "{'background-image' : 'url(' + recom[0].photos[0] + ')', height: clientHeight - 1 + 'px'}")
   .warp(:style = "{width: clientWidth - 10 + 'px', height: clientHeight * (catalogs.length + 1) + 'px', 'top': 100+ 'px', left: '10px'}")
-    .information(:style="{'line-height' : clientHeight * 0.6 + 'px'}") {{currentcatalog}}
+    .information(:style="{'line-height' : clientHeight * 0.6 + 'px'}") Lorem Ipsum
       .line
       .subinfo Lorem ipsum dolor sit amet, id pro quis vivendum singulis,
-    .gutter-background(:style = "{width: clientWidth - 10 + 'px',height: clientHeight * catalogs.length + 100 + 'px', 'top': clientHeight * 0.7 + 'px'}")
     .gutter(:style = "{width: clientWidth - 10 + 'px',height: clientHeight * catalogs.length + 100 + 'px', 'top': clientHeight * 0.7 + 'px'}")
-      .block(v-for = "item in showItems",:style = "{'background-image' : 'url(' + item.photos[0] + ')', width: (clientWidth - 10) * 0.315 + 'px', height: (clientWidth - 10) * 0.315+ 'px'}", @mouseover= "currentTouchBlock = $index", @mouseout= "currentTouchBlock = -1", @click = "$router.go('/item/' + item.id)")
-        .layer(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.5s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
-        .text(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.5s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
-          {{item.name}}
-
+      .block(:style = "{height : clientHeight + 'px'}")
+      .block(:style = "{height : clientHeight + 'px'}")
+      .block(:style = "{height : clientHeight + 'px'}")
 </template>
 
 <script>
@@ -45,8 +41,6 @@ export default {
   },
   data() {
     return {
-      currentTouchBlock: -1,
-      currentcatalog : '',
       searching : 0,
       fold : false,
       searchMsg: '',
@@ -54,25 +48,12 @@ export default {
       clientWidth: 0,
       items: [],
       recom: [],
-      showItems: [],
       catalogs: [],
-      heroPhoto: '',
     }
   },
   props: {
   },
   methods: {
-    changeCatalogs(cat) {
-      this.currentcatalog = cat
-      this.showItems = []
-      for(let i in this.items) {
-        if(this.items[i].catalog == cat) {
-          this.showItems.push(this.items[i])
-        }
-      }
-      this.heroPhoto = this.showItems[0].photos[0]
-      this.$router.go('/catalog/' + cat)
-    },
     IsPC() {
         var userAgentInfo = navigator.userAgent;
         var Agents = ["Android", "iPhone",
@@ -128,16 +109,14 @@ export default {
         type: 'GET',
         dataType: "json",
         success: (response) => {
-          console.log(response)
+          // console.log(response)
           this.items = response.items
           this.recom = response.recom
           this.catalogs = response.catalogs
-          this.changeCatalogs(this.$route.params.cata)
         }
     });
   },
   ready () {
-
     if (!this.IsPC()) {
       this.$router.go("/index.mobile")
     }
@@ -159,9 +138,6 @@ export default {
     window.onresize = () => {
       this.clientHeight = document.body.clientHeight
       this.clientWidth = document.body.clientWidth
-      if (this.clientWidth <= 800) {
-        this.clientWidth = 800
-      }
     }
     $(".trigger").click(() => {
       $(".menu").toggleClass("active");
@@ -184,19 +160,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@keyframes downtoup
-{
-  from {
-    bottom: -100%
-  }
-  to {
-    bottom: 0%
-  }
-}
-
 
 .app {
-  min-width: 888px;
   position: relative;
   background-color: white;
   font-family: "Century Gothic","Futura",sans-serif;
@@ -216,12 +181,10 @@ export default {
 }
 
 .warp {
-  min-width: 888px;
   position: absolute;
   z-index: 10;
   width: 100%;
   .information {
-    text-transform: uppercase;
     font-size: 50px;
     text-align: center;
     line-height: 100px;
@@ -246,49 +209,18 @@ export default {
       font-size: 15px;
     }
   }
-  .gutter-background {
-    position: absolute;
-    opacity: 0.2;
-    background-color: white;
-  }
   .gutter {
     position: absolute;
+    background-color: white;
     .block {
-      min-width: 200px;
-      height: 500px;
-      position: relative;
-      width: 30%;
+      width: 96%;
       background-color: #e7e7e7;
-      margin-top: 1%;
-      margin-left: 1%;
-      float: left;
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      overflow: hidden;
-      .layer {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        opacity: 0.8;
-        background-color: white;
-        bottom: -100%;
-      }
-      .text{
-        position: absolute;
-        font-size: 30px;
-        text-transform: uppercase;
-        color: black;
-        padding-bottom: 20px;
-        left: 20px;
-        font-family: TrumpGothicEas;
-        font-weight: 400;
-      }
+      margin: 1%;
     }
   }
 }
 
 #ecrin-header {
-  min-width: 500px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

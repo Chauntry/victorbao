@@ -13,17 +13,13 @@
       li.dir(v-for="cat in catalogs")
         a.text(v-if = "cat == currentcatalog", @click = "changeCatalogs(cat)",id= "current") {{cat}}
         a.text(v-if = "cat != currentcatalog", @click = "changeCatalogs(cat)") {{cat}}
-  .hero(v-if= "recom[0]", :style = "{'background-image' : 'url(' + heroPhoto + ')', height: clientHeight - 1 + 'px'}")
-  .warp(:style = "{width: clientWidth - 10 + 'px', height: clientHeight * (catalogs.length + 1) + 'px', 'top': 100+ 'px', left: '10px'}")
-    .information(:style="{'line-height' : clientHeight * 0.6 + 'px'}") {{currentcatalog}}
-      .line
-      .subinfo Lorem ipsum dolor sit amet, id pro quis vivendum singulis,
-    .gutter-background(:style = "{width: clientWidth - 10 + 'px',height: clientHeight * catalogs.length + 100 + 'px', 'top': clientHeight * 0.7 + 'px'}")
-    .gutter(:style = "{width: clientWidth - 10 + 'px',height: clientHeight * catalogs.length + 100 + 'px', 'top': clientHeight * 0.7 + 'px'}")
-      .block(v-for = "item in showItems",:style = "{'background-image' : 'url(' + item.photos[0] + ')', width: (clientWidth - 10) * 0.315 + 'px', height: (clientWidth - 10) * 0.315+ 'px'}", @mouseover= "currentTouchBlock = $index", @mouseout= "currentTouchBlock = -1", @click = "$router.go('/item/' + item.id)")
-        .layer(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.5s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
-        .text(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.5s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
-          {{item.name}}
+  .wrap(:style = "{'height' : (clientHeight - 120) + 'px', 'width' : (clientWidth - 70) + 'px'}")
+    .leftNav
+      .preView(v-for= "photo in displayItem.photos",:style = "{'background-image' : 'url(' + photo + ')', width: clientWidth * 0.1 + 'px', height: clientWidth * 0.1 + 'px'}", :id = "$index == currentPhoto ? 'selected': 'nonselected'", @click = "currentPhoto = $index")
+    .photoView
+      .photo(v-if= "displayItem.photos",:style = "{width: (clientWidth - 70) * 0.4 + 'px', height: (clientWidth - 70) * 0.4 + 'px', 'background-image': 'url(' + displayItem.photos[currentPhoto] + ')'}")
+    .instruction
+
 
 </template>
 
@@ -45,7 +41,7 @@ export default {
   },
   data() {
     return {
-      currentTouchBlock: -1,
+      currentPhoto: 0,
       currentcatalog : '',
       searching : 0,
       fold : false,
@@ -54,14 +50,20 @@ export default {
       clientWidth: 0,
       items: [],
       recom: [],
-      showItems: [],
       catalogs: [],
-      heroPhoto: '',
+      displayItem: {},
     }
   },
   props: {
   },
   methods: {
+    findDisplayItem( id ) {
+      for (let i in this.items) {
+        if (this.items[i].id == id)
+          return this.items[i]
+      }
+      return {}
+    },
     changeCatalogs(cat) {
       this.currentcatalog = cat
       this.showItems = []
@@ -94,31 +96,6 @@ export default {
     }
   },
   computed: {
-    searchItems() {
-      let startString = '<span style="background-color: #d7d7bc">'
-      let endString = '</span>'
-
-      console.log(this.searchMsg)
-      if (this.searchMsg == '') return this.items
-            let items = this.items
-      let list = []
-      for (let i in items) {
-        items[i].name = items[i].name.split(startString).join('')
-        items[i].name = items[i].name.split(endString).join('')
-        console.log(items[i].name)
-        if (items[i].name.toUpperCase().search(this.searchMsg.toUpperCase()) != -1){
-          let split =items[i].name.toUpperCase().split(this.searchMsg.toUpperCase())
-
-          let newItem = split[0]
-          for (let i = 1; i < split.length; i++) {
-            newItem = newItem + startString + this.searchMsg.toUpperCase() + endString + split[i]
-          }
-          items[i].name = newItem
-          list.push(items[i])
-        }
-      }
-      return list
-    }
   },
   route: {
   },
@@ -132,28 +109,14 @@ export default {
           this.items = response.items
           this.recom = response.recom
           this.catalogs = response.catalogs
-          this.changeCatalogs(this.$route.params.cata)
+          this.displayItem = this.findDisplayItem(this.$route.params.id)
         }
     });
   },
   ready () {
-
     if (!this.IsPC()) {
       this.$router.go("/index.mobile")
     }
-
-  var p=0,t=0;
-  $("#app").scroll(function(e){
-    p = $("#app").scrollTop();
-    if(t<=p && t> 1){
-       $("#ecrin-header").addClass("hidden");
-    }
-    else{
-        $("#ecrin-header").removeClass("hidden");
-    }
-    setTimeout(function(){t = p;},0);
-  });
-
     this.clientHeight = document.body.clientHeight
     this.clientWidth = document.body.clientWidth
     window.onresize = () => {
@@ -163,20 +126,6 @@ export default {
         this.clientWidth = 800
       }
     }
-    $(".trigger").click(() => {
-      $(".menu").toggleClass("active");
-      console.log(this.fold)
-      this.fold = this.fold ? false : true
-    });
-    $("#inpt_search").on('focus', function () {
-      $(this).parent('label').addClass('active');
-    });
-
-    $("#inpt_search").on('blur', function () {
-      if($(this).val().length == 0)
-        $(this).parent('label').removeClass('active');
-    });
-
   },
   beforeDestroy () {
   }
@@ -194,98 +143,44 @@ export default {
   }
 }
 
-
 .app {
   min-width: 888px;
   position: relative;
   background-color: white;
   font-family: "Century Gothic","Futura",sans-serif;
-  box-shadow: 1rem 0rem 1rem #112541;
-    transition: transform 1s;
+  transition: transform 1s;
 }
 
-
-.hero {
-  min-width: 888px;
-  position: fixed;
-  top: 100px;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: 0px -120px
-}
-
-.warp {
-  min-width: 888px;
+.wrap {
   position: absolute;
-  z-index: 10;
-  width: 100%;
-  .information {
-    text-transform: uppercase;
-    font-size: 50px;
-    text-align: center;
-    line-height: 100px;
-    color: white;
-    .line {
-      position: absolute;
-      height: 0px;
-      width: 400px;
-      border: 1px solid white;
-      left: 50%;
-      transform: translateX(-200px);
-      top: 200px
-    }
-    .subinfo {
-      position: absolute;
-      height: 100px;
-      width: 300px;
-      left: 50%;
-      transform: translateX(-150px);
-      top: 210px;
-      line-height: 15px;
-      font-size: 15px;
-    }
-  }
-  .gutter-background {
+  margin-left: 3%;
+  margin-top: 110px;
+  .leftNav {
     position: absolute;
-    opacity: 0.2;
-    background-color: white;
+    border: 1px solid black;
+    width: 20%;
+    height: 100%;
+    left: 0;
+
   }
-  .gutter {
+  .photoView {
     position: absolute;
-    .block {
-      min-width: 200px;
-      height: 500px;
-      position: relative;
-      width: 30%;
-      background-color: #e7e7e7;
-      margin-top: 1%;
-      margin-left: 1%;
-      float: left;
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      overflow: hidden;
-      .layer {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        opacity: 0.8;
-        background-color: white;
-        bottom: -100%;
-      }
-      .text{
-        position: absolute;
-        font-size: 30px;
-        text-transform: uppercase;
-        color: black;
-        padding-bottom: 20px;
-        left: 20px;
-        font-family: TrumpGothicEas;
-        font-weight: 400;
-      }
-    }
+    border: 1px solid black;
+    width: 40%;
+    height: 100%;
+    top: 0%;
+    left: 20%;
+  }
+  .instruction{
+    position: absolute;
+    border: 1px solid black;
+    width: 40%;
+    left: 60%;
+    top: 0%;
+    height: 100%;
   }
 }
+
 
 #ecrin-header {
   min-width: 500px;

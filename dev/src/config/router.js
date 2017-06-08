@@ -13,8 +13,20 @@ export function configRouter(router) {
     //   component: require('components/triple/display.vue')
     // },
     '/catalog': {
+      component: require('components/triple/catalogs.vue')
+    },
+
+    '/catalog/:cata': {
+       name: 'cata',
       component: require('components/triple/catalog.vue')
     },
+
+
+    '/item/:id': {
+      name: 'id',
+      component: require('components/triple/itemPage.vue')
+    },
+
 
     '/index.mobile': {
       component: require('components/triple.mobile/jewelry.vue')

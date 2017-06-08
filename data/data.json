@@ -1,21 +1,17 @@
 {
     "version": "1.1",
     "suggestion": [1, 3, 4],
-    "catalogs" : ["earring", "rings", "others"],
+    "catalogs": ["earring", "rings", "others"],
     "recom": [{
         "id": 1,
         "name": "stud",
         "descr": "describe of stud ...",
-        "photos": [
-            "http://www.victorbao.co.uk/data/0/1.jpg"
-        ]
+        "photos": ["http://www.victorbao.co.uk/data/0/1.jpg"]
     }, {
         "id": 6,
         "name": "glove",
         "descr": "describe of glove ...",
-        "photos": [
-            "http://www.victorbao.co.uk/data/0/2.png"
-        ]
+        "photos": ["http://www.victorbao.co.uk/data/0/2.png"]
     }],
     "items": [{
         "id": 1,
@@ -23,75 +19,41 @@
         "name": "stud",
         "price": "£2 650.00",
         "descr": "",
-        "photos": [
-            "http://www.victorbao.co.uk/data/1/1.jpg",
-            "http://www.victorbao.co.uk/data/1/2.jpg",
-            "http://www.victorbao.co.uk/data/1/3.jpg",
-            "http://www.victorbao.co.uk/data/1/4.jpg",
-            "http://www.victorbao.co.uk/data/1/5.jpg",
-            "http://www.victorbao.co.uk/data/1/6.jpg",
-            "http://www.victorbao.co.uk/data/1/7.jpg",
-            "http://www.victorbao.co.uk/data/1/8.jpg",
-            "http://www.victorbao.co.uk/data/1/9.jpg"
-        ]
+        "photos": ["http://www.victorbao.co.uk/data/1/1.jpg", "http://www.victorbao.co.uk/data/1/2.jpg", "http://www.victorbao.co.uk/data/1/3.jpg", "http://www.victorbao.co.uk/data/1/4.jpg", "http://www.victorbao.co.uk/data/1/5.jpg", "http://www.victorbao.co.uk/data/1/6.jpg", "http://www.victorbao.co.uk/data/1/7.jpg", "http://www.victorbao.co.uk/data/1/8.jpg", "http://www.victorbao.co.uk/data/1/9.jpg"]
     }, {
         "id": 2,
         "catalog": "others",
         "name": "spoon",
         "price": "N/A",
         "descr": "",
-        "photos": [
-            "http://www.victorbao.co.uk/data/2/1.png",
-            "http://www.victorbao.co.uk/data/2/2.png",
-            "http://www.victorbao.co.uk/data/2/3.png",
-            "http://www.victorbao.co.uk/data/2/4.png",
-            "http://www.victorbao.co.uk/data/2/5.png",
-            "http://www.victorbao.co.uk/data/2/6.png"
-        ]
+        "photos": ["http://www.victorbao.co.uk/data/2/3.png", "http://www.victorbao.co.uk/data/2/2.png", "http://www.victorbao.co.uk/data/2/1.png", "http://www.victorbao.co.uk/data/2/4.png", "http://www.victorbao.co.uk/data/2/5.png", "http://www.victorbao.co.uk/data/2/6.png"]
     }, {
         "id": 3,
         "catalog": "others",
         "name": "limit",
         "price": "£250.00",
         "descr": "",
-        "photos": [
-            "http://www.victorbao.co.uk/data/3/1.png",
-            "http://www.victorbao.co.uk/data/3/2.png",
-            "http://www.victorbao.co.uk/data/3/3.png",
-            "http://www.victorbao.co.uk/data/3/4.png"
-        ]
+        "photos": ["http://www.victorbao.co.uk/data/3/1.png", "http://www.victorbao.co.uk/data/3/2.png", "http://www.victorbao.co.uk/data/3/3.png", "http://www.victorbao.co.uk/data/3/4.png"]
     }, {
         "id": 4,
         "catalog": "rings",
         "name": "ring",
         "price": "N/A",
         "descr": "",
-        "photos": [
-            "http://www.victorbao.co.uk/data/4/1.png",
-            "http://www.victorbao.co.uk/data/4/2.png",
-            "http://www.victorbao.co.uk/data/4/3.png"
-        ]
+        "photos": ["http://www.victorbao.co.uk/data/4/3.png", "http://www.victorbao.co.uk/data/4/1.png", "http://www.victorbao.co.uk/data/4/2.png"]
     }, {
         "id": 5,
         "catalog": "others",
         "name": "vessle",
         "price": "£2 650.00",
         "descr": "",
-        "photos": [
-            "http://www.victorbao.co.uk/data/5/1.png",
-            "http://www.victorbao.co.uk/data/5/2.png",
-            "http://www.victorbao.co.uk/data/5/3.png"
-        ]
+        "photos": ["http://www.victorbao.co.uk/data/5/1.png", "http://www.victorbao.co.uk/data/5/2.png", "http://www.victorbao.co.uk/data/5/3.png"]
     }, {
         "id": 6,
         "catalog": "others",
         "name": "glove",
         "price": "N/A",
         "descr": "",
-        "photos": [
-            "http://www.victorbao.co.uk/data/6/1.png",
-            "http://www.victorbao.co.uk/data/6/2.png",
-            "http://www.victorbao.co.uk/data/6/3.png"
-        ]
+        "photos": ["http://www.victorbao.co.uk/data/6/1.png", "http://www.victorbao.co.uk/data/6/2.png", "http://www.victorbao.co.uk/data/6/3.png"]
     }]
 }
