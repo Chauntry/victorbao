@@ -17,8 +17,9 @@
     .leftNav
       .preView(v-for= "photo in displayItem.photos",:style = "{'background-image' : 'url(' + photo + ')', width: clientWidth * 0.1 + 'px', height: clientWidth * 0.1 + 'px'}", :id = "$index == currentPhoto ? 'selected': 'nonselected'", @click = "currentPhoto = $index")
     .photoView
-      .photo(v-if= "displayItem.photos",:style = "{width: '100%', height: clientHeight - 120 + 'px', 'background-image': 'url(' + displayItem.photos[currentPhoto] + ')'}")
-        .detail
+      .layer(v-if= "displayItem.photos",:style = "{width: '100%', height: (clientWidth - 70) * 0.5 + 'px'}", @mousemove = "showDetailPhoto", @mouseout = "photoDetail = 0")
+      .photo(v-if= "displayItem.photos",:style = "{width: '100%', height: (clientWidth - 70) * 0.5 + 'px', 'background-image': 'url(' + displayItem.photos[currentPhoto] + ')'}")
+        .detail(v-if= "photoDetail",:style = "photoDetailStyle")
     .instruction
       .name {{displayItem.name}}
       .price {{displayItem.price}}
@@ -64,11 +65,41 @@ export default {
       displayItem: {},
       informationDir: ['Description', 'Details', 'Delivery'],
       informationIndex: 0,
+      photoDetail: 0,
+      photoDetailStyle: {},
     }
   },
   props: {
   },
   methods: {
+    showDetailPhoto(e) {
+      console.log(e.offsetY)
+      this.photoDetail = 1
+      let width = (this.clientWidth - 70) * 0.5 * 0.5
+      let top = e.offsetY + 'px'
+      let left = e.offsetX + 'px'
+      let imgPositionX = -(e.offsetX * 2- width /2)
+      let imgPositionY = -(e.offsetY * 2- width /2)
+      let imgPosition = ''
+      if (imgPositionX < 0) {
+        imgPosition = '-' + (- imgPositionX)
+      } else {
+        imgPosition = '' + imgPositionX
+      }
+      if (imgPositionY < 0) {
+        imgPosition = imgPosition + 'px -' + (- imgPositionY) + 'px'
+      } else {
+        imgPosition = imgPosition + 'px ' +  imgPositionY + 'px'
+      }
+
+      this.photoDetailStyle = {top, left,
+        'width': width + 'px',
+        'height': width + 'px',
+        'background-image' : 'url(' + this.displayItem.photos[this.currentPhoto] + ')',
+        'background-size' : '400%',
+        'background-position' : imgPosition
+      }
+    },
     findDisplayItem( id ) {
       for (let i in this.items) {
         if (this.items[i].id == id)
@@ -156,7 +187,7 @@ export default {
 }
 
 .app {
-  min-width: 888px;
+
   position: relative;
   background-color: white;
   font-family: "Century Gothic","Futura",sans-serif;
@@ -168,6 +199,7 @@ export default {
   margin-left: 3%;
   margin-top: 110px;
   .leftNav {
+    // overflow: auto;
     position: absolute;
     width: 20%;
     height: 100%;
@@ -194,10 +226,23 @@ export default {
     height: 100%;
     top: 0%;
     left: 20%;
+    .layer {
+      z-index: 8;
+      position: absolute;
+    }
     .photo {
+      z-index: 7;
+      position: absolute;
       background-repeat: no-repeat;
       background-size: 100%;
-      background-position: 50% 50%;
+      .detail {
+        background-color: white;
+        z-index: 9;
+        position: absolute;
+        border: #DDB343 solid 1px;
+        transform: translate(-50%, -50%);
+        background-repeat: no-repeat;
+      }
     }
   }
   .instruction{
@@ -270,7 +315,6 @@ export default {
 
 
 #ecrin-header {
-  min-width: 500px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

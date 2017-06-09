@@ -54,6 +54,6 @@ export default {
 *
   font-family: verdana
 #app
-  // background: #22475E
+  background: white
   -webkit-overflow-scrolling: touch
 </style>
