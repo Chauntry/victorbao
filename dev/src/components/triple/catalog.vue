@@ -21,8 +21,8 @@
     .gutter-background(:style = "{width: clientWidth - 10 + 'px',height: clientHeight * catalogs.length + 100 + 'px', 'top': clientHeight * 0.7 + 'px'}")
     .gutter(:style = "{width: clientWidth - 10 + 'px',height: clientHeight * catalogs.length + 100 + 'px', 'top': clientHeight * 0.7 + 'px'}")
       .block(v-for = "item in showItems",:style = "{'background-image' : 'url(' + item.photos[0] + ')', width: (clientWidth - 10) * 0.315 + 'px', height: (clientWidth - 10) * 0.315+ 'px'}", @mouseover= "currentTouchBlock = $index", @mouseout= "currentTouchBlock = -1", @click = "$router.go('/item/' + item.id)")
-        .layer(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.5s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
-        .text(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.5s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
+        .layer(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.2s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
+        .text(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.2s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
           {{item.name}}
 
 </template>
@@ -233,7 +233,7 @@ export default {
       border: 1px solid white;
       left: 50%;
       transform: translateX(-200px);
-      top: 200px
+      top: 250px
     }
     .subinfo {
       position: absolute;
@@ -241,7 +241,7 @@ export default {
       width: 300px;
       left: 50%;
       transform: translateX(-150px);
-      top: 210px;
+      top: 260px;
       line-height: 15px;
       font-size: 15px;
     }

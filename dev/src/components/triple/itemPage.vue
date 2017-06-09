@@ -17,8 +17,18 @@
     .leftNav
       .preView(v-for= "photo in displayItem.photos",:style = "{'background-image' : 'url(' + photo + ')', width: clientWidth * 0.1 + 'px', height: clientWidth * 0.1 + 'px'}", :id = "$index == currentPhoto ? 'selected': 'nonselected'", @click = "currentPhoto = $index")
     .photoView
-      .photo(v-if= "displayItem.photos",:style = "{width: (clientWidth - 70) * 0.4 + 'px', height: (clientWidth - 70) * 0.4 + 'px', 'background-image': 'url(' + displayItem.photos[currentPhoto] + ')'}")
+      .photo(v-if= "displayItem.photos",:style = "{width: '100%', height: clientHeight - 120 + 'px', 'background-image': 'url(' + displayItem.photos[currentPhoto] + ')'}")
+        .detail
     .instruction
+      .name {{displayItem.name}}
+      .price {{displayItem.price}}
+      button.contact CONTACT
+      .information
+        ul.direction
+          li(v-for="dir in informationDir",@click="informationIndex = $index")
+            span(v-if="$index == informationIndex")#selected {{dir}}
+            span(v-if="$index != informationIndex") {{dir}}
+        .subInformation displayItem.{{informationDir[informationIndex]}}
 
 
 </template>
@@ -52,6 +62,8 @@ export default {
       recom: [],
       catalogs: [],
       displayItem: {},
+      informationDir: ['Description', 'Details', 'Delivery'],
+      informationIndex: 0,
     }
   },
   props: {
@@ -122,8 +134,8 @@ export default {
     window.onresize = () => {
       this.clientHeight = document.body.clientHeight
       this.clientWidth = document.body.clientWidth
-      if (this.clientWidth <= 800) {
-        this.clientWidth = 800
+      if (this.clientWidth <= 900) {
+        this.clientWidth = 900
       }
     }
   },
@@ -157,27 +169,102 @@ export default {
   margin-top: 110px;
   .leftNav {
     position: absolute;
-    border: 1px solid black;
     width: 20%;
     height: 100%;
     left: 0;
-
+    padding-left: 5%;
+    padding-top: 1%;
+    .preView {
+      border: #e9e9e9 solid 1px;
+      margin-top: 10%;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: 0% 50%;
+      opacity: 0.7;
+    }
+    #selected {
+      border: #e9e9e9 solid 2px;
+      border-color: #DDB343;
+      opacity: 1;
+    }
   }
   .photoView {
     position: absolute;
-    border: 1px solid black;
-    width: 40%;
+    width: 50%;
     height: 100%;
     top: 0%;
     left: 20%;
+    .photo {
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: 50% 50%;
+    }
   }
   .instruction{
     position: absolute;
-    border: 1px solid black;
-    width: 40%;
-    left: 60%;
+    width: 25%;
+    left: 75%;
     top: 0%;
     height: 100%;
+    .name {
+      text-align: center;
+      height: 60px;
+      text-transform: uppercase;
+      line-height: 70px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .price {
+      text-align: center;
+      height: 50px;
+      text-transform: uppercase;
+      line-height: 50px;
+      font-size: 15px;
+    }
+    .contact {
+      position: absolute;
+      left: 50%;
+      width: 124px;
+      margin-left: -65px;
+      cursor: pointer;
+      text-align: center;
+      background-color: black;
+      border: black solid 1px;
+      padding: 0 30px;
+      display: inline-block;
+      color: white;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 40px;
+      height: 40px;
+      text-transform: uppercase;
+    }
+    .contact:hover {
+      color: #DDB343;
+    }
+    .information {
+      margin-top: 70px;
+      border-top: 1px solid lightgrey;
+      .direction {
+        text-transform: uppercase;
+        li {
+          display: inline-block;
+          margin-right: 10px;
+          text-decoration: none;
+          padding: 10px 20px 10px 1px;
+          cursor: pointer;
+        }
+        #selected {
+          color: #DDB343;
+        }
+      }
+      .subInformation {
+        margin-top: 20px;
+        line-height: 1.7;
+        font-weight: 900;
+        font-size: 12px;
+      }
+    }
   }
 }
 

@@ -196,7 +196,7 @@ export default {
       border: 1px solid white;
       left: 50%;
       transform: translateX(-200px);
-      top: 200px
+      top: 250px
     }
     .subinfo {
       position: absolute;
@@ -204,7 +204,7 @@ export default {
       width: 300px;
       left: 50%;
       transform: translateX(-150px);
-      top: 210px;
+      top: 260px;
       line-height: 15px;
       font-size: 15px;
     }
