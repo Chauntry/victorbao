@@ -5,10 +5,10 @@
   .wrap
     .information
       h1 Information
-      h2 1. Click 'Submit' button before changed
+      h2 1. Click 'Submit' button after changed
       h2 2. Refresh page if undo
       h2 3. Photo name must not duplicated
-      h2 4. Inform administrator to back-up before submitting
+      h2 4. Inform administrator to back-up after submitting
       h2 Good Luck xD
     center.center
       button(@click = "addNewItem") Add New Item
@@ -33,7 +33,7 @@
         .price Price:
           input.iprice(v-model="item.price")
         div
-          input.file(id="file",type="file",accept="image/*")
+          input.file(:id="'file' + $index",type="file",accept="image/*")
         div
           button(@click="upload($index)") Add Photo
           button(@click="remove($index)") Remove
@@ -155,7 +155,8 @@ export default {
     },
     upload(index) {
       var formData = new FormData()
-      let upload_file = $('#file')[index].files[0]
+      console.log($('#file' + index))
+      let upload_file = $('#file' + index)[0].files[0]
       let name = upload_file.name
       // name = './' + index + '#' + (this.json.items[index].photos.length+1) + '.' + name
       // upload_file.name = name
