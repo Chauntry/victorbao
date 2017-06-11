@@ -28,7 +28,7 @@ export function configRouter(router) {
     },
 
 
-    '/index.mobile': {
+    '/catalog.mobile': {
       component: require('components/triple.mobile/jewelry.vue')
     },
     '/index': {
@@ -40,7 +40,7 @@ export function configRouter(router) {
       component: require('components/triple/jewelryobj.vue')
     },
 
-    '/index.mobile/:id': {
+    '/catalog.mobile/:id': {
       name: 'jewelry',
       component: require('components/triple.mobile/jewelryobj.vue')
     },

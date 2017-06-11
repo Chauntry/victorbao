@@ -1,11 +1,11 @@
 <template lang="jade">
 
 .app(@click="notsearching")
-  div#ecrin-header
-    .cntr(@click="searching = 2")
+  #ecrin-header
+    .cntr(@click="searching = searchMsg? 2 : 0")
       .cntr-innr
         label.search
-          input(id="inpt_search",type="text",v-model="searchMsg",@mouseover="searching = 1",@mouseout="notsearching")
+          input(id="inpt_search",type="text",v-model="searchMsg",@mouseover="searching = searchMsg? 1 : 0",@mouseout="notsearching",@input = "searching = searchMsg? 1 : 0")
     a.logo(@click = "$router.go('/')") Triple
     ul.catalog
       li.dir
@@ -13,8 +13,10 @@
       li.dir(v-for="cat in catalogs")
         a.text(v-if = "cat == currentcatalog", @click = "changeCatalogs(cat)",id= "current") {{cat}}
         a.text(v-if = "cat != currentcatalog", @click = "changeCatalogs(cat)") {{cat}}
-  .hero(v-if= "recom[0]", :style = "{'background-image' : 'url(' + heroPhoto + ')', height: clientHeight - 1 + 'px'}")
-  .warp(:style = "{width: clientWidth - 10 + 'px', height: clientHeight * (catalogs.length + 1) + 'px', 'top': 100+ 'px', left: '10px'}")
+
+  searching(v-if= "searching",:search-msg = "searchMsg", :items = "items", :catalogs = "catalogs")
+  .hero(v-if= "recom[0] && !searching", :style = "{'background-image' : 'url(' + heroPhoto + ')', height: clientHeight - 1 + 'px'}")
+  .warp(v-if= "!searching",:style = "{width: clientWidth - 10 + 'px', height: clientHeight * (catalogs.length + 1) + 'px', 'top': 100+ 'px', left: '10px'}")
     .information(:style="{'line-height' : clientHeight * 0.6 + 'px'}") {{currentcatalog}}
       .line
       .subinfo Lorem ipsum dolor sit amet, id pro quis vivendum singulis,
@@ -22,8 +24,7 @@
     .gutter(:style = "{width: clientWidth - 10 + 'px',height: clientHeight * catalogs.length + 100 + 'px', 'top': clientHeight * 0.7 + 'px'}")
       .block(v-for = "item in showItems",:style = "{'background-image' : 'url(' + item.photos[0] + ')', width: (clientWidth - 10) * 0.315 + 'px', height: (clientWidth - 10) * 0.315+ 'px'}", @mouseover= "currentTouchBlock = $index", @mouseout= "currentTouchBlock = -1", @click = "$router.go('/item/' + item.id)")
         .layer(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.2s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
-        .text(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.2s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}")
-          {{item.name}}
+        .text(:style = "{animation : currentTouchBlock== $index ? 'downtoup 0.2s' : '', bottom: currentTouchBlock== $index ? 0 : '-100%'}") {{item.name}}
 
 </template>
 
@@ -32,6 +33,7 @@ import * as actions from 'vuex/actions'
 import $ from 'jquery'
 import navtool from 'components/global/navtool_px.vue'
 import eye from 'components/triple/goods/eye.vue'
+import searching from 'components/global/searching.vue'
 export default {
   vuex: {
     getters: {
@@ -41,7 +43,8 @@ export default {
   },
   components: {
     eye,
-    navtool
+    navtool,
+    searching
   },
   data() {
     return {
@@ -88,7 +91,7 @@ export default {
         return flag;
     },
     notsearching () {
-      if ($(".search").hasClass('active'))
+      if ($(".search").hasClass('active') && this.searchMsg)
         return
       this.searching = 0
     }
@@ -226,6 +229,8 @@ export default {
     text-align: center;
     line-height: 100px;
     color: white;
+    position: relative;
+    z-index: 0;
     .line {
       position: absolute;
       height: 0px;
@@ -233,7 +238,7 @@ export default {
       border: 1px solid white;
       left: 50%;
       transform: translateX(-200px);
-      top: 250px
+      top: 60%;
     }
     .subinfo {
       position: absolute;
@@ -241,7 +246,7 @@ export default {
       width: 300px;
       left: 50%;
       transform: translateX(-150px);
-      top: 260px;
+      top: 65%;
       line-height: 15px;
       font-size: 15px;
     }
@@ -263,7 +268,9 @@ export default {
       margin-left: 1%;
       float: left;
       background-repeat: no-repeat;
-      background-size: 100% 100%;
+      background-size: 100%;
+      background-position: 50% 50%;
+      background-color: transparent;
       overflow: hidden;
       .layer {
         position: absolute;

@@ -1,19 +1,20 @@
 <template lang="jade">
 
 .app(@click="notsearching")
-  div#ecrin-header
-    .cntr(@click="searching = 2")
+  #ecrin-header
+    .cntr(@click="searching = searchMsg? 2 : 0")
       .cntr-innr
         label.search
-          input(id="inpt_search",type="text",v-model="searchMsg",@mouseover="searching = 1",@mouseout="notsearching")
+          input(id="inpt_search",type="text",v-model="searchMsg",@mouseover="searching = searchMsg? 1 : 0",@mouseout="notsearching",@input = "searching = searchMsg? 1 : 0")
     a.logo(@click = "$router.go('/')") Triple
     ul.catalog
       li.dir
         a.text(@click = "$router.go('/catalog')")#current home
       li.dir(v-for="cat in catalogs")
         a.text(@click = "$router.go('/catalog/' + cat)") {{cat}}
-  .hero(v-if= "recom[0]", :style = "{'background-image' : 'url(' + recom[0].photos[0] + ')', height: clientHeight - 1 + 'px'}")
-  .warp(:style = "{width: clientWidth - 10 + 'px', height: clientHeight * (catalogs.length + 1) + 'px', 'top': 100+ 'px', left: '10px'}")
+  searching(v-if= "searching",:search-msg = "searchMsg", :items = "items", :catalogs = "catalogs")
+  .hero(v-if= "recom[0] && !searching", :style = "{'background-image' : 'url(' + recom[0].photos[0] + ')', height: clientHeight - 1 + 'px'}")
+  .warp(v-if="!searching",:style = "{width: clientWidth - 10 + 'px', height: clientHeight * (catalogs.length + 1) + 'px', 'top': 100+ 'px', left: '10px'}")
     .information(:style="{'line-height' : clientHeight * 0.6 + 'px'}") Lorem Ipsum
       .line
       .subinfo Lorem ipsum dolor sit amet, id pro quis vivendum singulis,
@@ -27,6 +28,7 @@
 import * as actions from 'vuex/actions'
 import $ from 'jquery'
 import navtool from 'components/global/navtool_px.vue'
+import searching from 'components/global/searching.vue'
 import eye from 'components/triple/goods/eye.vue'
 export default {
   vuex: {
@@ -37,7 +39,8 @@ export default {
   },
   components: {
     eye,
-    navtool
+    navtool,
+    searching
   },
   data() {
     return {
@@ -69,7 +72,7 @@ export default {
         return flag;
     },
     notsearching () {
-      if ($(".search").hasClass('active'))
+      if ($(".search").hasClass('active') && this.searchMsg)
         return
       this.searching = 0
     }
@@ -79,14 +82,13 @@ export default {
       let startString = '<span style="background-color: #d7d7bc">'
       let endString = '</span>'
 
-      console.log(this.searchMsg)
+
       if (this.searchMsg == '') return this.items
             let items = this.items
       let list = []
       for (let i in items) {
         items[i].name = items[i].name.split(startString).join('')
         items[i].name = items[i].name.split(endString).join('')
-        console.log(items[i].name)
         if (items[i].name.toUpperCase().search(this.searchMsg.toUpperCase()) != -1){
           let split =items[i].name.toUpperCase().split(this.searchMsg.toUpperCase())
 
@@ -165,8 +167,7 @@ export default {
   position: relative;
   background-color: white;
   font-family: "Century Gothic","Futura",sans-serif;
-  box-shadow: 1rem 0rem 1rem #112541;
-    transition: transform 1s;
+  transition: transform 1s;
 }
 
 
@@ -189,6 +190,7 @@ export default {
     text-align: center;
     line-height: 100px;
     color: white;
+    position: relative;
     .line {
       position: absolute;
       height: 0px;
@@ -196,7 +198,7 @@ export default {
       border: 1px solid white;
       left: 50%;
       transform: translateX(-200px);
-      top: 250px
+      top: 60%
     }
     .subinfo {
       position: absolute;
@@ -204,7 +206,7 @@ export default {
       width: 300px;
       left: 50%;
       transform: translateX(-150px);
-      top: 260px;
+      top: 65%;
       line-height: 15px;
       font-size: 15px;
     }

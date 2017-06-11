@@ -1,15 +1,35 @@
 <template lang="jade">
 .app
-  .lock(v-if = "key != 'admin'") key:
-    input(v-model = "key",length = "200px")
-  .wrap(v-if = "key == 'admin'")
+  //- .lock(v-if = "key != 'admin'") key:
+  //-   input(v-model = "key",length = "200px")
+  .wrap
+    .information
+      h1 Information
+      h2 1. Click 'Submit' button before changed
+      h2 2. Refresh page if undo
+      h2 3. Photo name must not duplicated
+      h2 4. Inform administrator to back-up before submitting
+      h2 Good Luck xD
     center.center
       button(@click = "addNewItem") Add New Item
       button(@click = "update(json)") Submit
+    .catalogs
+      span Catalogs:
+      .catalog(v-for = "cata in json.catalogs")
+        span {{cata}}
+        button(@click = "DelectCatalog($index)") Delete
+        button(v-if= "$index != json.catalogs.length-1",@click = "moveCatalogDown($index)") Move Down
+        button(v-if= "$index != 0",@click = "moveCatalogUp($index)") Move Up
+      .lower
+        button(@click = "NewCatalog") NewCatalog
+        input.iname(v-model="NewCatalogName")
     .item(v-if = "json.items", v-for = "item in json.items")
       .information
         .name Name:
           input.iname(v-model="item.name")
+        .catalog Catalog:
+          select.iname(v-model="item.catalog")
+            option(v-for = "cata in json.catalogs") {{cata}}
         .price Price:
           input.iprice(v-model="item.price")
         div
@@ -18,7 +38,7 @@
           button(@click="upload($index)") Add Photo
           button(@click="remove($index)") Remove
         .index
-          button(v-if= "$index != json.items.length -1", @click = "moveDown($index)") moveDown
+          button(v-if= "$index != json.items.length -1", @click = "moveDown($index)") moveDw
           button(v-if= "$index != 0", @click = "moveUp($index)") moveUp
       .description Description:
         textarea(type = "text", v-model= "item.descr").des
@@ -47,6 +67,7 @@ export default {
   data() {
     return {
       key: '',
+      NewCatalogName: '',
       index: 0,
       json: {},
     }
@@ -65,6 +86,36 @@ export default {
             console.log(response)
           },
       })
+    },
+    moveCatalogUp(index) {
+      const movecatalog = this.json.catalogs[index]
+      this.json.catalogs.$set(index, this.json.catalogs[index - 1])
+      this.json.catalogs.$set(index - 1, movecatalog)
+    },
+    moveCatalogDown(index) {
+      const movecatalog = this.json.catalogs[index]
+      this.json.catalogs.$set(index, this.json.catalogs[index + 1])
+      this.json.catalogs.$set(index + 1, movecatalog)
+    },
+    NewCatalog() {
+      for (let i in this.json.catalogs) {
+        if (this.json.catalogs[i] == this.NewCatalogName) {
+          alert('Cannot add duplicate catalog.')
+          return
+        }
+      }
+      this.json.catalogs.push(this.NewCatalogName)
+      this.NewCatalogName = ''
+    },
+    DelectCatalog(index) {
+      let deleteC = this.json.catalogs[index]
+      for (let i in this.json.items) {
+        if (this.json.items[i].catalog == deleteC) {
+          alert('Cannot delete this catalog, as ' + this.json.items[i].name + '(id:' + this.json.items[i].id + ') belongs to this selected catalog.')
+          return
+        }
+      }
+      this.json.catalogs.splice(index,1)
     },
     addNewItem() {
       const item = {
@@ -170,11 +221,34 @@ export default {
 .app
   width: 100%
   color: white
+  background-color: #264d67
+  top: 0
+  position: absolute
+  .information
+    margin-bottom: 40px
+    line-height: 35px
   .wrap
     width: 80%
     height: auto
     margin-left: 10%
     margin-top: 5%
+    .catalogs
+      background-color: #1b384b
+      margin-bottom: 20px
+      font-size: 30px
+      .catalog
+        height: 25px
+        margin: 7px
+        padding: 3px
+        font-size: 15px
+        padding-left: 20px
+        border-top: 1px solid white
+        button
+          float: right
+      .lower
+        margin-left: 20px
+        font-size: 20px
+        height: 30px
     .item
       position: relative
       height: 200px
@@ -200,6 +274,11 @@ export default {
         width: 160px
         .file
           font-size: 10px
+        .catalog
+          position: absolute
+          top: 0
+          width: 50%
+          left: 50%
       .description
         position: absolute
         top: 0
@@ -233,7 +312,6 @@ export default {
       margin-left: 100px
       margin-bottom: 50px
   .lock
-
     height: 100px
     margin-left: 20%
     margin-top: 20%

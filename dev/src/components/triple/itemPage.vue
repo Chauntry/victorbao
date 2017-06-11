@@ -1,24 +1,24 @@
 <template lang="jade">
 
 .app(@click="notsearching")
-  div#ecrin-header
-    .cntr(@click="searching = 2")
+  #ecrin-header
+    .cntr(@click="searching = searchMsg? 1 : 0")
       .cntr-innr
         label.search
-          input(id="inpt_search",type="text",v-model="searchMsg",@mouseover="searching = 1",@mouseout="notsearching")
+          input(id="inpt_search",type="text",v-model="searchMsg",@mouseover="searching = searchMsg? 1 : 0",@mouseout="notsearching",@input = "searching = searchMsg? 1 : 0")
     a.logo(@click = "$router.go('/')") Triple
     ul.catalog
       li.dir
-        a.text(@click = "$router.go('/catalog')") home
+        a.text(@click = "$router.go('/catalog')")#current home
       li.dir(v-for="cat in catalogs")
-        a.text(v-if = "cat == currentcatalog", @click = "changeCatalogs(cat)",id= "current") {{cat}}
-        a.text(v-if = "cat != currentcatalog", @click = "changeCatalogs(cat)") {{cat}}
-  .wrap(:style = "{'height' : (clientHeight - 120) + 'px', 'width' : (clientWidth - 70) + 'px'}")
+        a.text(@click = "$router.go('/catalog/' + cat)") {{cat}}
+  searching(v-if= "searching",:search-msg = "searchMsg", :items = "items", :catalogs = "catalogs")
+  .wrap(v-if= "!searching",:style = "{'height' : (clientHeight - 120) + 'px', 'width' : (clientWidth - 70) + 'px'}")
     .leftNav
       .preView(v-for= "photo in displayItem.photos",:style = "{'background-image' : 'url(' + photo + ')', width: clientWidth * 0.1 + 'px', height: clientWidth * 0.1 + 'px'}", :id = "$index == currentPhoto ? 'selected': 'nonselected'", @click = "currentPhoto = $index")
     .photoView
-      .layer(v-if= "displayItem.photos",:style = "{width: '100%', height: (clientWidth - 70) * 0.5 + 'px'}", @mousemove = "showDetailPhoto", @mouseout = "photoDetail = 0")
-      .photo(v-if= "displayItem.photos",:style = "{width: '100%', height: (clientWidth - 70) * 0.5 + 'px', 'background-image': 'url(' + displayItem.photos[currentPhoto] + ')'}")
+      .layer(v-if= "displayItem.photos",:style = "{width: (clientWidth - 70) * 0.333 + 'px', height: (clientWidth - 70) * 0.333 + 'px'}", @mousemove = "showDetailPhoto", @mouseout = "photoDetail = 0")
+      .photo(v-if= "displayItem.photos",:style = "{width: (clientWidth - 70) * 0.333 + 'px', height: (clientWidth - 70) * 0.333 + 'px', 'background-image': 'url(' + displayItem.photos[currentPhoto] + ')'}")
         .detail(v-if= "photoDetail",:style = "photoDetailStyle")
     .instruction
       .name {{displayItem.name}}
@@ -39,6 +39,7 @@ import * as actions from 'vuex/actions'
 import $ from 'jquery'
 import navtool from 'components/global/navtool_px.vue'
 import eye from 'components/triple/goods/eye.vue'
+import searching from 'components/global/searching.vue'
 export default {
   vuex: {
     getters: {
@@ -48,7 +49,8 @@ export default {
   },
   components: {
     eye,
-    navtool
+    navtool,
+    searching
   },
   data() {
     return {
@@ -96,7 +98,7 @@ export default {
         'width': width + 'px',
         'height': width + 'px',
         'background-image' : 'url(' + this.displayItem.photos[this.currentPhoto] + ')',
-        'background-size' : '400%',
+        'background-size' : '266.4%',
         'background-position' : imgPosition
       }
     },
@@ -133,7 +135,7 @@ export default {
         return flag;
     },
     notsearching () {
-      if ($(".search").hasClass('active'))
+      if ($(".search").hasClass('active') && this.searchMsg)
         return
       this.searching = 0
     }
@@ -227,10 +229,14 @@ export default {
     top: 0%;
     left: 20%;
     .layer {
+      left: 20%;
+      top: 15%;
       z-index: 8;
       position: absolute;
     }
     .photo {
+      left: 20%;
+      top: 15%;
       z-index: 7;
       position: absolute;
       background-repeat: no-repeat;

@@ -56,4 +56,5 @@ export default {
 #app
   background: white
   -webkit-overflow-scrolling: touch
+
 </style>
