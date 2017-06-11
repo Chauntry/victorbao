@@ -258,8 +258,6 @@ export default {
       overflow-x: auto
       overflow-y: hidden
       div
-        margin-top: 5px
-        margin-bottom: 12px
         padding-left: 2px
       input
         color: white
@@ -272,6 +270,7 @@ export default {
         left: 0
         height: 100%
         width: 160px
+        line-height: 25px
         .file
           font-size: 10px
         .catalog
