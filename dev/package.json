@@ -2,7 +2,7 @@
   "name": "seed3",
   "version": "1.0.0",
   "description": "A intv seed3.0 vue-webpack-demo",
-  "author": "zhangzan <330503975@qq.com>",
+  "author": "baoxiotong <baoxiao_tong@hotmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

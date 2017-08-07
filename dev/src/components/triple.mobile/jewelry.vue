@@ -32,7 +32,7 @@
         <h1 class="title centered">
         <span>triple he</span> recommend </h1>
         <!-- START New Campaigns -->
-        <a v-for="item in recom" class="new-campaign" href="#/index.mobile/{{item.id}}">
+        <a v-for="item in recom" class="new-campaign" href="#/catalog.mobile/{{item.id}}">
           <img :src="item.photos[0]"/>
           <h2>
             <span>{{item.descr}}</span>
@@ -47,10 +47,10 @@
       <h3 v-if= "!searchMsg" > <span>THE COLLECTION</span> </h3>
       <ul data-category="Rose_des_vents" class="js-category">
         <li v-for="item in searchItems">
-          <a href="#/index.mobile/{{item.id}}" class="packshot">
+          <a href="#/catalog.mobile/{{item.id}}" class="packshot">
           <img :src="item.photos[0]"/></a>
           <div>
-           <a href="#/index.mobile/{{item.id}}">
+           <a href="#/catalog.mobile/{{item.id}}">
              <h4 v-html= "item.name"> {{item.name}} </h4>
              <p></p>
              <span class="price" v-html= "item.price">{{item.price}}</span>
@@ -66,21 +66,21 @@
     <div id="ecrin-footer" data-role="footer" class="ecrin-global ecrin-white-footer">
 
      <div id="ecrin-footer-wrapper" class="border-top">
-       <a href="#/index.mobile" class="ecrin-footer-buttons">Contact</a>
+       <a href="#/catalog.mobile" class="ecrin-footer-buttons">Contact</a>
      </div>
 
 
      <div id="ecrin-footer-links">
       <nav>
        <ul>
-        <li> <a href="#/index.mobile">Boutiques</a></li>
-        <li> <a href="#/index.mobile">Contact</a></li>
-        <li><a href="#/index.mobile">My Account</a></li>
+        <li> <a href="#/catalog.mobile">Boutiques</a></li>
+        <li> <a href="#/catalog.mobile">Contact</a></li>
+        <li><a href="#/catalog.mobile">My Account</a></li>
        </ul>
        <ul>
-        <li> <a href="#/index.mobile">Legal Terms</a></li>
-        <li> <a href="#/index.mobile">Personal Data</a></li>
-        <li> <a href="#/index.mobile">CAREERS</a></li>
+        <li> <a href="#/catalog.mobile">Legal Terms</a></li>
+        <li> <a href="#/catalog.mobile">Personal Data</a></li>
+        <li> <a href="#/catalog.mobile">CAREERS</a></li>
        </ul>
       </nav>
      </div>

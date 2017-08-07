@@ -120,7 +120,8 @@ export default {
   },
   ready () {
     if (!this.IsPC()) {
-      this.$router.go("/index.mobile")
+      console.log("hi")
+      this.$router.go("/catalog.mobile")
     }
 
   var p=0,t=0;
